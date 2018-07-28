@@ -45,7 +45,7 @@ int psxReadInput() {
 	{
 		BUTTON_LEFT = 0;
 	}
-	else if(joyX > 2048)
+	else if(joyX > 1000)
 	{
 		BUTTON_RIGHT = 0;
 	}
@@ -54,7 +54,7 @@ int psxReadInput() {
 	{
 		BUTTON_UP = 0;
 	}
-	else if(joyY > 2048)
+	else if(joyY > 1000)
 	{
 		BUTTON_DOWN = 0;
 	}
@@ -71,6 +71,7 @@ int psxReadInput() {
 	// printf("-START:%d", !BUTTON_START);
 	// printf("-A:%d", !BUTTON_A);
 	// printf("-B:%d\n", !BUTTON_B);
+
 	int b1, b2;
 	b2 = 1<<7 | (BUTTON_B<<6) | (BUTTON_A<<5) | 1<<4 | 1<<3 | 1<<2 | 1<<1 | 1<<0;
 	b1 = (BUTTON_LEFT<<7) | (BUTTON_DOWN<<6) | (BUTTON_RIGHT<<5) | (BUTTON_UP<<4) | (BUTTON_START<<3) | 1<<2 | 1<<1 | (BUTTON_SELECT<<0);
