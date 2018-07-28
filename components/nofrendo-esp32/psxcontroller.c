@@ -20,34 +20,13 @@
 #include "freertos/queue.h"
 
 #include <driver/adc.h>
-
 #include "driver/gpio.h"
 #include "soc/gpio_struct.h"
 #include "psxcontroller.h"
 #include "sdkconfig.h"
+#include "pins.h"
 
 #define DELAY() asm("nop; nop; nop; nop;nop; nop; nop; nop;nop; nop; nop; nop;nop; nop; nop; nop;")
-
-#define GAMEPAD_IO_X ADC1_CHANNEL_6 //GPIO_NUM_34
-#define GAMEPAD_IO_Y ADC1_CHANNEL_7 //GPIO_NUM_35
-
-// #define JOY_UP 			GPIO_NUM_17
-// #define JOY_DOWN 		GPIO_NUM_14
-// #define JOY_RIGHT 		GPIO_NUM_35
-// #define JOY_LEFT 		GPIO_NUM_34
-
-#define JOY_SELECT 		GPIO_NUM_32
-#define JOY_START 		GPIO_NUM_33
-#define JOY_A 			GPIO_NUM_12
-#define JOY_B 			GPIO_NUM_27
-// #define JOY_VOL_UP 		GPIO_NUM_34 // NO INTERNAL PULLUP
-// #define JOY_VOL_DOWN 	GPIO_NUM_39 // NO INTERNAL PULLUP
-// #define JOY_MENU		GPIO_NUM_35 // NO INTERNAL PULLUP
-
-#define BUTTON_SELECT 	gpio_get_level(JOY_SELECT)	
-#define BUTTON_START 	gpio_get_level(JOY_START)
-#define BUTTON_A	 	gpio_get_level(JOY_A)
-#define BUTTON_B 		gpio_get_level(JOY_B)
 
 #if CONFIG_HW_PSX_ENA
 
@@ -59,8 +38,8 @@ static void psxDone()
 int psxReadInput() {
 	uint8_t BUTTON_UP = 1, BUTTON_DOWN = 1, BUTTON_LEFT = 1, BUTTON_RIGHT = 1;
 
-	int joyX = adc1_get_raw(GAMEPAD_IO_X);
-    int joyY = adc1_get_raw(GAMEPAD_IO_Y);
+	int joyX = adc1_get_raw(JOY_X_AXIS);
+    int joyY = adc1_get_raw(JOY_Y_AXIS);
 
 	if(joyX > 3500)
 	{
@@ -101,8 +80,8 @@ int psxReadInput() {
 
 void psxcontrollerInit() {
 	adc1_config_width(ADC_WIDTH_12Bit);
-    adc1_config_channel_atten(GAMEPAD_IO_X, ADC_ATTEN_11db);
-	adc1_config_channel_atten(GAMEPAD_IO_Y, ADC_ATTEN_11db);
+    adc1_config_channel_atten(JOY_X_AXIS, ADC_ATTEN_11db);
+	adc1_config_channel_atten(JOY_Y_AXIS, ADC_ATTEN_11db);
 
 	gpio_pad_select_gpio(JOY_SELECT);
 	gpio_pad_select_gpio(JOY_START);

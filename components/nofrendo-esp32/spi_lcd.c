@@ -26,24 +26,7 @@
 #include "freertos/task.h"
 #include "driver/periph_ctrl.h"
 #include "spi_lcd.h"
-
-#define PIN_NUM_MISO 25//CONFIG_HW_LCD_MISO_GPIO
-#define PIN_NUM_MOSI 23//CONFIG_HW_LCD_MOSI_GPIO
-#define PIN_NUM_CLK  19//CONFIG_HW_LCD_CLK_GPIO
-#define PIN_NUM_CS   22//CONFIG_HW_LCD_CS_GPIO
-#define PIN_NUM_DC   21//CONFIG_HW_LCD_DC_GPIO
-#define PIN_NUM_RST  18//CONFIG_HW_LCD_RESET_GPIO
-#define PIN_NUM_BCKL  5//CONFIG_HW_LCD_BL_GPIO
-/*
-This Pinout also works
-*/
-// #define PIN_NUM_MISO 19
-// #define PIN_NUM_MOSI 23
-// #define PIN_NUM_CLK  18
-// #define PIN_NUM_CS   5
-// #define PIN_NUM_DC   21
-// #define PIN_NUM_RST  15
-// #define PIN_NUM_BCKL  14
+#include "pins.h"
 
 #define LCD_SEL_CMD()   GPIO.out_w1tc = (1 << PIN_NUM_DC) // Low to send command 
 #define LCD_SEL_DATA()  GPIO.out_w1ts = (1 << PIN_NUM_DC) // High to send data
