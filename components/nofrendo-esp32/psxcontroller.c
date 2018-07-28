@@ -13,11 +13,13 @@
 // limitations under the License.
 
 #include <stdio.h>
+#include <stdint.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/semphr.h"
 #include "freertos/queue.h"
 
+#include <driver/adc.h>
 
 #include "driver/gpio.h"
 #include "soc/gpio_struct.h"
@@ -26,10 +28,13 @@
 
 #define DELAY() asm("nop; nop; nop; nop;nop; nop; nop; nop;nop; nop; nop; nop;nop; nop; nop; nop;")
 
-#define JOY_UP 			GPIO_NUM_17
-#define JOY_DOWN 		GPIO_NUM_14
-#define JOY_RIGHT 		GPIO_NUM_35
-#define JOY_LEFT 		GPIO_NUM_34
+#define GAMEPAD_IO_X ADC1_CHANNEL_6 //GPIO_NUM_34
+#define GAMEPAD_IO_Y ADC1_CHANNEL_7 //GPIO_NUM_35
+
+// #define JOY_UP 			GPIO_NUM_17
+// #define JOY_DOWN 		GPIO_NUM_14
+// #define JOY_RIGHT 		GPIO_NUM_35
+// #define JOY_LEFT 		GPIO_NUM_34
 
 #define JOY_SELECT 		GPIO_NUM_32
 #define JOY_START 		GPIO_NUM_33
@@ -39,10 +44,6 @@
 // #define JOY_VOL_DOWN 	GPIO_NUM_39 // NO INTERNAL PULLUP
 // #define JOY_MENU		GPIO_NUM_35 // NO INTERNAL PULLUP
 
-#define BUTTON_UP		gpio_get_level(JOY_UP)
-#define BUTTON_DOWN		gpio_get_level(JOY_DOWN)	
-#define BUTTON_RIGHT	gpio_get_level(JOY_RIGHT)	
-#define BUTTON_LEFT		gpio_get_level(JOY_LEFT)
 #define BUTTON_SELECT 	gpio_get_level(JOY_SELECT)	
 #define BUTTON_START 	gpio_get_level(JOY_START)
 #define BUTTON_A	 	gpio_get_level(JOY_A)
@@ -53,43 +54,40 @@
 static void psxDone()
 {
     DELAY();
-    // GPIO_REG_WRITE(GPIO_OUT_W1TS_REG, (1 << PSX_ATT));
 }
 
 int psxReadInput() {
-		// const int ev[16]={
-		// 	event_joypad1_select,
-		// 	0,
-		// 	0,
-		// 	event_joypad1_start,
-		// 	event_joypad1_up,
-		// 	event_joypad1_right,
-		// 	event_joypad1_down,
-		// 	event_joypad1_left,
-		// 	0,
-		// 	0,
-		// 	0,
-		// 	0,
-		// 	event_soft_reset,
-		// 	event_joypad1_a,
-		// 	event_joypad1_b,
-		// 	event_hard_reset
-		// };
-		// BIT0 = SELECT
-		// BIT3 = START
-		// BIT4 = U
-		// BIT5 = R
-		// BIT6 = D
-		// BIT7 = L
-		// BIT12 = RST
-		// BIT13 = A
-		// BIT14 = B
+	uint8_t BUTTON_UP = 1, BUTTON_DOWN = 1, BUTTON_LEFT = 1, BUTTON_RIGHT = 1;
+
+	int joyX = adc1_get_raw(GAMEPAD_IO_X);
+    int joyY = adc1_get_raw(GAMEPAD_IO_Y);
+
+	if(joyX > 3500)
+	{
+		BUTTON_LEFT = 0;
+	}
+	else if(joyX > 2048)
+	{
+		BUTTON_RIGHT = 0;
+	}
+
+	if(joyY > 3500)
+	{
+		BUTTON_UP = 0;
+	}
+	else if(joyY > 2048)
+	{
+		BUTTON_DOWN = 0;
+	}
+
+	// printf("JOY_X: %d - ", joyX);
+	// printf("JOY_Y: %d - ", joyY);
 
 	// printf("U:%d-", !BUTTON_UP);
 	// printf("-D:%d", !BUTTON_DOWN);
-	printf("-R:%d", !BUTTON_RIGHT);
-	printf("-L:%d", !BUTTON_LEFT);
-	printf("\n");
+	// printf("-R:%d", !BUTTON_RIGHT);
+	// printf("-L:%d", !BUTTON_LEFT);
+	// printf("\n");
 	// printf("-SELECT:%d", !BUTTON_SELECT);
 	// printf("-START:%d", !BUTTON_START);
 	// printf("-A:%d", !BUTTON_A);
@@ -102,34 +100,25 @@ int psxReadInput() {
 }
 
 void psxcontrollerInit() {
-	gpio_pad_select_gpio(JOY_UP);
-	gpio_pad_select_gpio(JOY_DOWN);
-	gpio_pad_select_gpio(JOY_RIGHT);
-	gpio_pad_select_gpio(JOY_LEFT);
+	adc1_config_width(ADC_WIDTH_12Bit);
+    adc1_config_channel_atten(GAMEPAD_IO_X, ADC_ATTEN_11db);
+	adc1_config_channel_atten(GAMEPAD_IO_Y, ADC_ATTEN_11db);
+
 	gpio_pad_select_gpio(JOY_SELECT);
 	gpio_pad_select_gpio(JOY_START);
 	gpio_pad_select_gpio(JOY_A);
 	gpio_pad_select_gpio(JOY_B);
 	
-	gpio_set_direction(JOY_UP, GPIO_MODE_INPUT);
-	gpio_set_direction(JOY_DOWN, GPIO_MODE_INPUT);
-	gpio_set_direction(JOY_RIGHT, GPIO_MODE_INPUT);
-	gpio_set_direction(JOY_LEFT, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_SELECT, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_START, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_A, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_B, GPIO_MODE_INPUT);
 
-	gpio_set_pull_mode(JOY_UP, GPIO_PULLUP_ONLY);
-	gpio_set_pull_mode(JOY_DOWN, GPIO_PULLUP_ONLY);
-	gpio_set_pull_mode(JOY_RIGHT, GPIO_PULLUP_ONLY);
-	gpio_set_pull_mode(JOY_LEFT, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_SELECT, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_START, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_A, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_B, GPIO_PULLUP_ONLY);
 }
-
 
 #else
 

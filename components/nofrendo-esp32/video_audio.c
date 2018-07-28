@@ -21,7 +21,6 @@
 #undef true
 #undef bool
 
-
 #include <math.h>
 #include <string.h>
 #include <noftypes.h>
@@ -35,7 +34,7 @@
 #include <nesinput.h>
 #include <osd.h>
 #include <stdint.h>
-#include "driver/i2s.h"
+#include <driver/i2s.h>
 #include "sdkconfig.h"
 #include <spi_lcd.h>
 
@@ -46,9 +45,13 @@
 
 #define  DEFAULT_WIDTH        256
 #define  DEFAULT_HEIGHT       NES_VISIBLE_HEIGHT
+#define I2S_NUM I2S_NUM_0
 
+static float Volume = 0.000f;
 
 TimerHandle_t timer;
+
+void audio_submit(uint16_t* stereoAudioBuffer, int frameCount);
 
 //Seemingly, this will be called only once. Should call func with a freq of frequency,
 int osd_installtimer(int frequency, void *func, int funcsize, void *counter, int countersize)
@@ -79,12 +82,16 @@ static void do_audio_frame() {
 		audio_callback(audio_frame, n); //get more data
 		//16 bit mono -> 32-bit (16 bit r+l)
 		for (int i=n-1; i>=0; i--) {
-			audio_frame[i*2+1]=audio_frame[i];
-			audio_frame[i*2]=audio_frame[i];
+
+			audio_frame[i*2+1]=(uint16_t)audio_frame[i];
+			audio_frame[i*2]=(uint16_t)audio_frame[i];
 		}
-		i2s_write_bytes(0, audio_frame, 4*n, portMAX_DELAY);
+		size_t bytes_written = 0;
+		audio_submit(audio_frame, n);
+		// i2s_write(0, audio_frame, 4*n, &bytes_written, portMAX_DELAY);
 		left-=n;
 	}
+
 #endif
 }
 
@@ -107,7 +114,9 @@ static int osd_init_sound(void)
 	i2s_config_t cfg={
 		.mode=I2S_MODE_DAC_BUILT_IN|I2S_MODE_TX|I2S_MODE_MASTER,
 		.sample_rate=DEFAULT_SAMPLERATE,
+		// .sample_rate=32000,
 		.bits_per_sample=I2S_BITS_PER_SAMPLE_16BIT,
+		// .channel_format=I2S_DAC_CHANNEL_BOTH_EN,
 		.channel_format=I2S_CHANNEL_FMT_RIGHT_LEFT,
 		.communication_format=I2S_COMM_FORMAT_I2S_MSB,
 		.intr_alloc_flags=0,
@@ -116,7 +125,8 @@ static int osd_init_sound(void)
 	};
 	i2s_driver_install(0, &cfg, 4, &queue);
 	i2s_set_pin(0, NULL);
-	i2s_set_dac_mode(I2S_DAC_CHANNEL_LEFT_EN); 
+	// i2s_set_dac_mode(I2S_DAC_CHANNEL_LEFT_EN); 
+	i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN);
 
 	//I2S enables *both* DAC channels; we only need DAC1.
 	//ToDo: still needed now I2S supports set_dac_mode?
@@ -345,4 +355,74 @@ int osd_init()
 	xTaskCreatePinnedToCore(&videoTask, "videoTask", 2048, NULL, 5, NULL, 1);
 	osd_initinput();
 	return 0;
+}
+
+void audio_submit(uint16_t* stereoAudioBuffer, int frameCount)
+{
+    short currentAudioSampleCount = frameCount * 2;
+
+#if CONFIG_SOUND_ENA
+    // Convert for built in DAC
+    for (short i = 0; i < currentAudioSampleCount; i += 2)
+    {
+        int32_t dac0;
+        int32_t dac1;
+
+        if (Volume == 0.0f)
+        {
+            // Disable amplifier
+            dac0 = 0;
+            dac1 = 0;
+        }
+        else
+        {
+            // Down mix stero to mono
+            int32_t sample = stereoAudioBuffer[i];
+            sample += stereoAudioBuffer[i + 1];
+            sample >>= 1;
+
+            // Normalize
+            const float sn = (float)sample / 0x8000;
+
+            // Scale
+            const int magnitude = 127 + 127;
+            const float range = magnitude  * sn * Volume;
+
+            // Convert to differential output
+            if (range > 127)
+            {
+                dac1 = (range - 127);
+                dac0 = 127;
+            }
+            else if (range < -127)
+            {
+                dac1  = (range + 127);
+                dac0 = -127;
+            }
+            else
+            {
+                dac1 = 0;
+                dac0 = range;
+            }
+
+            dac0 += 0x80;
+            dac1 = 0x80 - dac1;
+
+            dac0 <<= 8;
+            dac1 <<= 8;
+        }
+
+        stereoAudioBuffer[i] = (int16_t)dac1;
+        stereoAudioBuffer[i + 1] = (int16_t)dac0;
+    }
+
+#endif
+
+    int len = currentAudioSampleCount * sizeof(int16_t);
+    int count = i2s_write_bytes(I2S_NUM, (const char *)stereoAudioBuffer, len, portMAX_DELAY);
+    if (count != len)
+    {
+        printf("i2s_write_bytes: count (%d) != len (%d)\n", count, len);
+        abort();
+    }
 }

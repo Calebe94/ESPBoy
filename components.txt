@@ -1,0 +1,63 @@
+*******************************************************************************
+COMPONENT_DIRS (components searched for here)
+/Users/calebe94/Projects/ESP32/ESPBoy/components
+/Users/calebe94/esp/esp-idf/components
+/Users/calebe94/Projects/ESP32/ESPBoy/main
+*******************************************************************************
+COMPONENTS (list of component names)
+KairOS app_trace app_update aws_iot bootloader bootloader_support bt coap console cxx driver esp-tls esp32 esp_adc_cal esp_http_client esptool_py ethernet expat fatfs freertos heap idf_test jsmn json libsodium log lwip main mbedtls mdns micro-ecc newlib nghttp nofrendo nofrendo-esp32 nvs_flash openssl partition_table pthread sdmmc smartconfig_ack soc spi_flash spiffs tcpip_adapter ulp vfs wear_levelling wpa_supplicant xtensa-debug-module
+*******************************************************************************
+EXCLUDE_COMPONENTS (list of excluded names)
+(none provided)
+*******************************************************************************
+COMPONENT_PATHS (paths to all components):
+/Users/calebe94/Projects/ESP32/ESPBoy/components/KairOS
+/Users/calebe94/esp/esp-idf/components/app_trace
+/Users/calebe94/esp/esp-idf/components/app_update
+/Users/calebe94/esp/esp-idf/components/aws_iot
+/Users/calebe94/esp/esp-idf/components/bootloader
+/Users/calebe94/esp/esp-idf/components/bootloader_support
+/Users/calebe94/esp/esp-idf/components/bt
+/Users/calebe94/esp/esp-idf/components/coap
+/Users/calebe94/esp/esp-idf/components/console
+/Users/calebe94/esp/esp-idf/components/cxx
+/Users/calebe94/esp/esp-idf/components/driver
+/Users/calebe94/esp/esp-idf/components/esp-tls
+/Users/calebe94/esp/esp-idf/components/esp32
+/Users/calebe94/esp/esp-idf/components/esp_adc_cal
+/Users/calebe94/esp/esp-idf/components/esp_http_client
+/Users/calebe94/esp/esp-idf/components/esptool_py
+/Users/calebe94/esp/esp-idf/components/ethernet
+/Users/calebe94/esp/esp-idf/components/expat
+/Users/calebe94/esp/esp-idf/components/fatfs
+/Users/calebe94/esp/esp-idf/components/freertos
+/Users/calebe94/esp/esp-idf/components/heap
+/Users/calebe94/esp/esp-idf/components/idf_test
+/Users/calebe94/esp/esp-idf/components/jsmn
+/Users/calebe94/esp/esp-idf/components/json
+/Users/calebe94/esp/esp-idf/components/libsodium
+/Users/calebe94/esp/esp-idf/components/log
+/Users/calebe94/esp/esp-idf/components/lwip
+/Users/calebe94/Projects/ESP32/ESPBoy/main
+/Users/calebe94/esp/esp-idf/components/mbedtls
+/Users/calebe94/esp/esp-idf/components/mdns
+/Users/calebe94/esp/esp-idf/components/micro-ecc
+/Users/calebe94/esp/esp-idf/components/newlib
+/Users/calebe94/esp/esp-idf/components/nghttp
+/Users/calebe94/Projects/ESP32/ESPBoy/components/nofrendo
+/Users/calebe94/Projects/ESP32/ESPBoy/components/nofrendo-esp32
+/Users/calebe94/esp/esp-idf/components/nvs_flash
+/Users/calebe94/esp/esp-idf/components/openssl
+/Users/calebe94/esp/esp-idf/components/partition_table
+/Users/calebe94/esp/esp-idf/components/pthread
+/Users/calebe94/esp/esp-idf/components/sdmmc
+/Users/calebe94/esp/esp-idf/components/smartconfig_ack
+/Users/calebe94/esp/esp-idf/components/soc
+/Users/calebe94/esp/esp-idf/components/spi_flash
+/Users/calebe94/esp/esp-idf/components/spiffs
+/Users/calebe94/esp/esp-idf/components/tcpip_adapter
+/Users/calebe94/esp/esp-idf/components/ulp
+/Users/calebe94/esp/esp-idf/components/vfs
+/Users/calebe94/esp/esp-idf/components/wear_levelling
+/Users/calebe94/esp/esp-idf/components/wpa_supplicant
+/Users/calebe94/esp/esp-idf/components/xtensa-debug-module
