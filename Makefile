@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := nesemu
+PROJECT_NAME := ESPBoy
 
 include $(IDF_PATH)/make/project.mk
 

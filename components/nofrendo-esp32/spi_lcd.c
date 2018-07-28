@@ -17,6 +17,7 @@
 #include "sdkconfig.h"
 #include "rom/ets_sys.h"
 #include "rom/gpio.h"
+#include "driver/gpio.h"
 #include "soc/gpio_reg.h"
 #include "soc/gpio_sig_map.h"
 #include "soc/gpio_struct.h"
@@ -40,6 +41,10 @@
 #define LCD_BKG_ON()    GPIO.out_w1ts = (1 << PIN_NUM_BCKL) // Backlight ON
 #define LCD_BKG_OFF()   GPIO.out_w1tc = (1 << PIN_NUM_BCKL) //Backlight OFF
 #endif
+
+#define LCD_BKL_CFG()   gpio_pad_select_gpio(PIN_NUM_BCKL); gpio_set_direction(PIN_NUM_BCKL,GPIO_MODE_OUTPUT);
+#define LCD_BKL_ON()    gpio_set_level(PIN_NUM_BCKL, 1);
+#define LCD_BKL_OFF()   gpio_set_level(PIN_NUM_BCKL, 0);
 
 #define SPI_NUM  0x3
 
@@ -68,7 +73,9 @@ static void LCD_WriteData(const uint8_t data)
 
 static void  ILI9341_INITIAL ()
 {
-    LCD_BKG_ON();
+    LCD_BKL_CFG();
+    LCD_BKL_ON();
+
     //------------------------------------Reset Sequence-----------------------------------------//
 
     LCD_RST_SET();

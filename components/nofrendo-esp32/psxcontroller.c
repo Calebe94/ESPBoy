@@ -36,10 +36,11 @@ static void psxDone()
 }
 
 int psxReadInput() {
-	uint8_t BUTTON_UP = 1, BUTTON_DOWN = 1, BUTTON_LEFT = 1, BUTTON_RIGHT = 1;
+	uint8_t BUTTON_UP = 1, BUTTON_DOWN = 1, BUTTON_LEFT = 1, BUTTON_RIGHT = 1, SOFT_RESET = 1, HARD_RESET = 1;
+	uint8_t b1, b2;
 
-	int joyX = adc1_get_raw(JOY_X_AXIS);
-    int joyY = adc1_get_raw(JOY_Y_AXIS);
+	uint16_t joyX = adc1_get_raw(JOY_X_AXIS);
+    uint16_t joyY = adc1_get_raw(JOY_Y_AXIS);
 
 	if(joyX > 3500)
 	{
@@ -72,8 +73,8 @@ int psxReadInput() {
 	// printf("-A:%d", !BUTTON_A);
 	// printf("-B:%d\n", !BUTTON_B);
 
-	int b1, b2;
-	b2 = 1<<7 | (BUTTON_B<<6) | (BUTTON_A<<5) | 1<<4 | 1<<3 | 1<<2 | 1<<1 | 1<<0;
+	SOFT_RESET = ((BUTTON_SELECT==0) && (BUTTON_START==0));
+	b2 = HARD_RESET<<7 | (BUTTON_B<<6) | (BUTTON_A<<5) | SOFT_RESET<<4 | 1<<3 | 1<<2 | 1<<1 | 1<<0;
 	b1 = (BUTTON_LEFT<<7) | (BUTTON_DOWN<<6) | (BUTTON_RIGHT<<5) | (BUTTON_UP<<4) | (BUTTON_START<<3) | 1<<2 | 1<<1 | (BUTTON_SELECT<<0);
 	psxDone();
 	return (b2<<8)|b1;
