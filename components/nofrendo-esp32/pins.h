@@ -13,11 +13,11 @@
 #define JOY_A 			GPIO_NUM_13
 #define JOY_B 			GPIO_NUM_12
 #define JOY_MENU		GPIO_NUM_33
-#define JOY_VOL 	 	ADC1_CHANNEL_3 //GPIO_NUM_39 or VN pin
+#define JOY_VOL 	 	ADC1_CHANNEL_3 // GPIO_NUM_39 or VN pin
 
 //-------------------- SIGNAL INPUTS --------------------
 #define BAT_LEVEL		ADC1_CHANNEL_0 // GPIO_NUM_36 or VP pin
-#define JACK_SENSE		GPIO_NUM_25
+#define JACK_SENSE		ADC2_CHANNEL_8 // GPIO_NUM_25
 
 //-------------------- SIGNAL OUTPUTS --------------------
 #define AUDIO_SHDN      GPIO_NUM_15
@@ -37,7 +37,7 @@
 #define PIN_NUM_CS      GPIO_NUM_5
 #define PIN_NUM_DC      GPIO_NUM_21
 #define PIN_NUM_BCKL    GPIO_NUM_4
-#define PIN_NUM_RST     GPIO_NUM_12 // No need! Connected on ESP32 RST Pin
+#define PIN_NUM_RST     GPIO_NUM_0 // No need! Connected on ESP32 RST Pin
 
 //-------------------- SD CARD --------------------
 #define SD_CS           GPIO_NUM_22

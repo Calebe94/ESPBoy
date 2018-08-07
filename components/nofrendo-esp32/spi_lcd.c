@@ -52,20 +52,20 @@
 #define LCD_TYPE_ST 1
 
 
-static void spi_write_byte(const uint8_t data){
+void spi_write_byte(const uint8_t data){
     SET_PERI_REG_BITS(SPI_MOSI_DLEN_REG(SPI_NUM), SPI_USR_MOSI_DBITLEN, 0x7, SPI_USR_MOSI_DBITLEN_S);
     WRITE_PERI_REG((SPI_W0_REG(SPI_NUM)), data);
     SET_PERI_REG_MASK(SPI_CMD_REG(SPI_NUM), SPI_USR);
     while (READ_PERI_REG(SPI_CMD_REG(SPI_NUM))&SPI_USR);
 }
 
-static void LCD_WriteCommand(const uint8_t cmd)
+void LCD_WriteCommand(const uint8_t cmd)
 {
     LCD_SEL_CMD();
     spi_write_byte(cmd);
 }
 
-static void LCD_WriteData(const uint8_t data)
+void LCD_WriteData(const uint8_t data)
 {
     LCD_SEL_DATA();
     spi_write_byte(data);
@@ -336,8 +336,8 @@ static void spi_master_init()
     SET_PERI_REG_BITS(SPI_CTRL2_REG(SPI_NUM), SPI_MISO_DELAY_MODE, 0, SPI_MISO_DELAY_MODE_S);
     CLEAR_PERI_REG_MASK(SPI_SLAVE_REG(SPI_NUM), SPI_SLAVE_MODE);
     
-    WRITE_PERI_REG(SPI_CLOCK_REG(SPI_NUM), (1 << SPI_CLKCNT_N_S) | (1 << SPI_CLKCNT_L_S));//40MHz
-    //WRITE_PERI_REG(SPI_CLOCK_REG(SPI_NUM), SPI_CLK_EQU_SYSCLK); // 80Mhz
+    // WRITE_PERI_REG(SPI_CLOCK_REG(SPI_NUM), (1 << SPI_CLKCNT_N_S) | (1 << SPI_CLKCNT_L_S));//40MHz
+    WRITE_PERI_REG(SPI_CLOCK_REG(SPI_NUM), SPI_CLK_EQU_SYSCLK); // 80Mhz
     
     SET_PERI_REG_MASK(SPI_USER_REG(SPI_NUM), SPI_CS_SETUP | SPI_CS_HOLD | SPI_USR_MOSI);
     SET_PERI_REG_MASK(SPI_CTRL2_REG(SPI_NUM), ((0x4 & SPI_MISO_DELAY_NUM) << SPI_MISO_DELAY_NUM_S));

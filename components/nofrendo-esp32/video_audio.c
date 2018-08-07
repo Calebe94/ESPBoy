@@ -47,7 +47,7 @@
 #define  DEFAULT_HEIGHT       NES_VISIBLE_HEIGHT
 #define I2S_NUM I2S_NUM_0
 
-static float Volume = 0.000f;
+static float Volume = 1.000f;
 
 TimerHandle_t timer;
 
@@ -231,8 +231,6 @@ static void clear(uint8 color)
 //   SDL_FillRect(mySurface, 0, color);
 }
 
-
-
 /* acquire the directbuffer for writing */
 static bitmap_t *lock_write(void)
 {
@@ -247,12 +245,10 @@ static void free_write(int num_dirties, rect_t *dirty_rects)
    bmp_destroy(&myBitmap);
 }
 
-
 static void custom_blit(bitmap_t *bmp, int num_dirties, rect_t *dirty_rects) {
 	xQueueSend(vidQueue, &bmp, 0);
 	do_audio_frame();
 }
-
 
 //This runs on core 1.
 static void videoTask(void *arg) {
@@ -266,7 +262,6 @@ static void videoTask(void *arg) {
 		ili9341_write_frame(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, (const uint8_t **)bmp->line);
 	}
 }
-
 
 /*
 ** Input
