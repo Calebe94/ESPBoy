@@ -39,6 +39,8 @@
 #include <spi_lcd.h>
 
 #include <psxcontroller.h>
+#include <hal_audio.h>
+#include <hal_battery.h>
 
 #define  DEFAULT_SAMPLERATE   22100
 #define  DEFAULT_FRAGSIZE     128
@@ -47,7 +49,7 @@
 #define  DEFAULT_HEIGHT       NES_VISIBLE_HEIGHT
 #define I2S_NUM I2S_NUM_0
 
-static float Volume = 0.000f;
+static float Volume = 0.500f;
 
 TimerHandle_t timer;
 
@@ -257,6 +259,18 @@ static void videoTask(void *arg) {
 	x = (320-DEFAULT_WIDTH)/2;
     y = ((240-DEFAULT_HEIGHT)/2);
     while(1) {
+
+		if (is_audio_plug_connected() != 0 )
+		{
+			amplifier_set_off();
+		}
+		else
+		{
+			amplifier_set_on();
+		}
+
+		printf("Battery - RAW: %d  - V: %f - P: %d \n", get_battery_value(), get_battery_voltage(), get_battery_porcentage());
+
 //		xQueueReceive(vidQueue, &bmp, portMAX_DELAY);//skip one frame to drop to 30
 		xQueueReceive(vidQueue, &bmp, portMAX_DELAY);
 		ili9341_write_frame(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, (const uint8_t **)bmp->line);
@@ -349,6 +363,11 @@ int osd_init()
 	vidQueue=xQueueCreate(1, sizeof(bitmap_t *));
 	xTaskCreatePinnedToCore(&videoTask, "videoTask", 2048, NULL, 5, NULL, 1);
 	osd_initinput();
+
+	audio_amplifier_init();
+	jack_sense_init();
+	battery_manager_init();
+
 	return 0;
 }
 

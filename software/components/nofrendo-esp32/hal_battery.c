@@ -5,15 +5,16 @@
 #include <driver/adc.h>
 #include <driver/gpio.h>
 
-#include "power.h"
+#include "hal_battery.h"
 #include "pins.h"
 
 /*
     Initialize the power manager wich will read the battery's voltage level
 */
-void power_manager_init()
+void battery_manager_init()
 {
 	adc1_config_channel_atten(BAT_LEVEL, ADC_ATTEN_11db);
+    adc1_config_channel_atten(CHARGING_SENSIGN, ADC_ATTEN_11db);
 }
 
 /*
@@ -40,3 +41,18 @@ uint8_t get_battery_porcentage()
     return (uint8_t) 255;
 }
 
+
+/*
+    Check if the battery is charging.
+    Returns Non-zero if it's true.
+*/
+uint8_t is_battery_charging()
+{
+    uint16_t raw_value = adc1_get_raw(CHARGING_SENSIGN);
+    uint8_t status = 0;
+    if(raw_value > 2048)
+    {
+        status = 1;
+    }
+    return status;
+}

@@ -25,10 +25,9 @@
 #include "psxcontroller.h"
 #include "sdkconfig.h"
 #include "pins.h"
+#include <hal_audio.h>
 
 #define DELAY() asm("nop; nop; nop; nop;nop; nop; nop; nop;nop; nop; nop; nop;nop; nop; nop; nop;")
-
-#if CONFIG_HW_PSX_ENA
 
 static void psxDone()
 {
@@ -61,27 +60,33 @@ int psxReadInput() {
 		BUTTON_DOWN = 0;
 	}
 
-	printf("JOY_X: %d - ", joyX);
-	printf("\tJOY_Y: %d - ", joyY);
-	// printf("\n");
-	printf("U:%d-", !BUTTON_UP);
-	printf("-D:%d", !BUTTON_DOWN);
-	printf("-R:%d", !BUTTON_RIGHT);
-	printf("-L:%d", !BUTTON_LEFT);
-	// printf("\n");
-	printf("-SELECT:%d", !BUTTON_SELECT);
-	printf("-START:%d", !BUTTON_START);
-	printf("-A:%d", !BUTTON_A);
-	printf("-B:%d\n", !BUTTON_B);
+	// printf("JOY_X: %d - ", joyX);
+	// printf("\tJOY_Y: %d - ", joyY);
+	// // printf("\n");
+	// printf("U:%d-", !BUTTON_UP);
+	// printf("-D:%d", !BUTTON_DOWN);
+	// printf("-R:%d", !BUTTON_RIGHT);
+	// printf("-L:%d", !BUTTON_LEFT);
+	// // printf("\n");
+	// printf("-SELECT:%d", !BUTTON_SELECT);
+	// printf("-START:%d", !BUTTON_START);
+	// printf("-A:%d", !BUTTON_A);
+	// printf("-B:%d\n", !BUTTON_B);
 
 	SOFT_RESET = ((BUTTON_SELECT==0) && (BUTTON_START==0));
 	b2 = HARD_RESET<<7 | (BUTTON_B<<6) | (BUTTON_A<<5) | SOFT_RESET<<4 | 1<<3 | 1<<2 | 1<<1 | 1<<0;
 	b1 = (BUTTON_LEFT<<7) | (BUTTON_DOWN<<6) | (BUTTON_RIGHT<<5) | (BUTTON_UP<<4) | (BUTTON_START<<3) | 1<<2 | 1<<1 | (BUTTON_SELECT<<0);
+
 	psxDone();
 	return (b2<<8)|b1;
 }
 
 void psxcontrollerInit() {
+	
+	// audio_amplifier_init();
+	// amplifier_set_off();
+	// amplifier_set_on();
+
 	adc1_config_width(ADC_WIDTH_12Bit);
     adc1_config_channel_atten(JOY_X_AXIS, ADC_ATTEN_11db);
 	adc1_config_channel_atten(JOY_Y_AXIS, ADC_ATTEN_11db);
@@ -91,31 +96,16 @@ void psxcontrollerInit() {
 	gpio_pad_select_gpio(JOY_START);
 	gpio_pad_select_gpio(JOY_A);
 	gpio_pad_select_gpio(JOY_B);
-	// gpio_pad_select_gpio(AUDIO_SHDN);
 	
 	gpio_set_direction(JOY_SELECT, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_START, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_A, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_B, GPIO_MODE_INPUT);
 
-	// gpio_set_direction(AUDIO_SHDN, GPIO_MODE_OUTPUT);
-	// gpio_set_level(AUDIO_SHDN, 0);
-
 	gpio_set_pull_mode(JOY_SELECT, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_START, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_A, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_B, GPIO_PULLUP_ONLY);
+
+	// jack_sense_init();
 }
-
-#else
-
-int psxReadInput() {
-	return 0xFFFF;
-}
-
-
-void psxcontrollerInit() {
-	printf("PSX controller disabled in menuconfig; no input enabled.\n");
-}
-
-#endif

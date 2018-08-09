@@ -14,7 +14,7 @@ Under develompent...
 
 This portable console is(or must be) capable to emulate games from the 4º generation of game consoles (the portable ones) such as Sega Game Gear and Nintendo Game Boy and the 3º generation such as Sega Master System and Nintendo Entertainment System.
 
-# BOM
+# Basic BOM
 
 | Quantity | Component | Image | Price |
 |:---:|:---:|:---:|:---:|

@@ -1,12 +1,12 @@
-#ifndef _POWER_H_
-#define _POWER_H_
+#ifndef _BATTERY_H_
+#define _BATTERY_H_
 
 #include <stdint.h>
 
 /*
     Initialize the power manager wich will read the battery's voltage level
 */
-void power_manager_init();
+void battery_manager_init();
 
 /*
     Get the voltage value from 0V to approximatelly 3.3V
@@ -23,4 +23,10 @@ uint16_t get_battery_value();
 */
 uint8_t get_battery_porcentage();
 
+/*
+    Check if the battery is charging.
+    Returns Non-zero if it's true.
+*/
+uint8_t is_battery_charging();
+    
 #endif

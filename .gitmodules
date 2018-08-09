@@ -1,3 +1,0 @@
-[submodule "components/esp-ili9341"]
-	path = components/esp-ili9341
-	url = https://github.com/tuupola/esp-ili9341

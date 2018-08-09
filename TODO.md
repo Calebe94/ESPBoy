@@ -2,11 +2,11 @@
 
 ## Unreleased
 
-- [] make audio p2 connector be detected
-- [] power the audio amplifier on/off if p2 connector is detected
+- [x] make audio p2 connector be detected
+- [x] power the audio amplifier on/off if p2 connector is detected
 - [] enable menu and volume buttons
 - [] change audio volume
-- [] enable the battery voltage level monitor
+- [x] enable the battery voltage level monitor
 - [] enable the battery charging sensing
 - [] enable the SD Card reader
 - [] read rom files stored in SD Card

@@ -16,8 +16,9 @@
 #define JOY_VOL 	 	ADC1_CHANNEL_3 // GPIO_NUM_39 or VN pin
 
 //-------------------- SIGNAL INPUTS --------------------
-#define BAT_LEVEL		ADC1_CHANNEL_0 // GPIO_NUM_36 or VP pin
-#define JACK_SENSE		ADC2_CHANNEL_8 // GPIO_NUM_25
+#define BAT_LEVEL		    ADC1_CHANNEL_0 // GPIO_NUM_36 or VP pin
+#define JACK_SENSE		    ADC2_CHANNEL_8 // GPIO_NUM_25
+#define CHARGING_SENSIGN    ADC1_CHANNEL_4 // GPIO_NUM_32
 
 //-------------------- SIGNAL OUTPUTS --------------------
 #define AUDIO_SHDN      GPIO_NUM_15
