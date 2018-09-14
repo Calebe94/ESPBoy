@@ -1,14 +1,28 @@
-#include "freertos/FreeRTOS.h"
-#include "esp_wifi.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
 #include "esp_system.h"
 #include "esp_event.h"
 #include "esp_event_loop.h"
 #include "nvs_flash.h"
-#include "driver/gpio.h"
 #include "nofrendo.h"
 #include "esp_partition.h"
 
 #include "esp_freertos_hooks.h"
+#include "lvgl.h"
+
+#include "disp_spi.h"
+#include "ili9341.h"
+#include "sysinit.h"
+#include "hal_battery.h"
+#include "hal_keypad.h"
+#include "status_screen.h"
+
+static void lv_tick_task(void);
 
 char *osd_getromdata();
 
@@ -16,11 +30,52 @@ esp_err_t event_handler(void *ctx, system_event_t *event);
 
 void nes_run();
 
+void lvgl_run();
+
 int app_main(void)
 {
-	nes_run();
+  modules_init();
+  nes_run();
+	lvgl_run();
 
-    return 0;
+  return 0;
+}
+
+void lvgl_run()
+{
+	lv_init();
+
+	// disp_spi_init();
+	// ili9431_init();
+
+	lv_disp_drv_t disp;
+	lv_disp_drv_init(&disp);
+	disp.disp_flush = ili9431_flush;
+	lv_disp_drv_register(&disp);
+
+	esp_register_freertos_tick_hook(lv_tick_task);
+
+	lv_indev_drv_t indev_drv;
+	lv_indev_drv_init(&indev_drv);     /*Basic initialization*/
+	indev_drv.type = LV_INDEV_TYPE_KEYPAD;              /*See below.*/
+	indev_drv.read = lv_keypad_read;           /*See below.*/
+	lv_indev_drv_register(&indev_drv);     /*Register the driver in LittlevGL*/
+
+	// demo_create();
+	screen_t screen = gui_create();
+    uint16_t delay = 0;
+	
+	while(1)
+    {
+		vTaskDelay(1);
+        delay++;
+        if(delay == 1000)
+        {
+            gui_update(&screen, 4, 3, get_battery_voltage());
+            delay = 0;
+        }
+		lv_task_handler();
+	}
 }
 
 char *osd_getromdata() 
@@ -49,4 +104,9 @@ void nes_run()
 	nofrendo_main(0, NULL);
 	printf("NoFrendo died? WtF?\n");
 	asm("break.n 1");
+}
+
+static void lv_tick_task(void)
+{
+	lv_tick_inc(portTICK_RATE_MS);
 }

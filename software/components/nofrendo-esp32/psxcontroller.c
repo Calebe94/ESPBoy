@@ -25,7 +25,7 @@
 #include "psxcontroller.h"
 #include "sdkconfig.h"
 #include "pins.h"
-#include <hal_audio.h>
+// #include <hal_audio.h>
 
 #define DELAY() asm("nop; nop; nop; nop;nop; nop; nop; nop;nop; nop; nop; nop;nop; nop; nop; nop;")
 

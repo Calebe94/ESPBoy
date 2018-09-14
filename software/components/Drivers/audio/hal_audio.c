@@ -1,6 +1,6 @@
 #include <driver/adc.h>
 #include <driver/gpio.h>
-#include <hal_audio.h>
+#include "hal_audio.h"
 #include <pins.h>
 
 void jack_sense_init()

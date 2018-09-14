@@ -30,6 +30,7 @@
 #define BUTTON_START 	gpio_get_level(JOY_START)
 #define BUTTON_A	 	gpio_get_level(JOY_A)
 #define BUTTON_B 		gpio_get_level(JOY_B)
+#define BUTTON_MENU     gpio_get_level(JOY_MENU)
 
 //-------------------- DISPLAY ILI9341 --------------------
 #define PIN_NUM_MISO    GPIO_NUM_19

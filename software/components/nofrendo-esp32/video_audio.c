@@ -39,6 +39,7 @@
 #include <spi_lcd.h>
 
 #include <psxcontroller.h>
+
 #include <hal_audio.h>
 #include <hal_battery.h>
 
@@ -49,7 +50,7 @@
 #define  DEFAULT_HEIGHT       NES_VISIBLE_HEIGHT
 #define I2S_NUM I2S_NUM_0
 
-static float Volume = 0.500f;
+static float Volume = 0.020f;
 
 TimerHandle_t timer;
 
@@ -63,7 +64,6 @@ int osd_installtimer(int frequency, void *func, int funcsize, void *counter, int
 	xTimerStart(timer, 0);
    return 0;
 }
-
 
 /*
 ** Audio

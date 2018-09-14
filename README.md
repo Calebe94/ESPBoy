@@ -1,5 +1,7 @@
 Under develompent... 
 
+![ESPBoy](https://github.com/Calebe94/ESPBoy/blob/master/resources/media/ESPBoy.jpg?raw=true)
+
 # Table of Contents
 
 * [Description](#description)
@@ -29,10 +31,6 @@ This portable console is(or must be) capable to emulate games from the 4º gener
 # Setup
 
 Comming soon...
-
-## TODO
-
-Coming soon...
 
 # Team
 

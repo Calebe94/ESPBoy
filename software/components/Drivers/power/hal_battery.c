@@ -13,7 +13,7 @@
 */
 void battery_manager_init()
 {
-	adc1_config_channel_atten(BAT_LEVEL, ADC_ATTEN_11db);
+	  adc1_config_channel_atten(BAT_LEVEL, ADC_ATTEN_11db);
     adc1_config_channel_atten(CHARGING_SENSIGN, ADC_ATTEN_11db);
 }
 
@@ -22,7 +22,7 @@ void battery_manager_init()
 */
 float get_battery_voltage()
 {
-    return (float)(adc1_get_raw(BAT_LEVEL) * 3.3 )/4095;
+    return (float)(adc1_get_raw(BAT_LEVEL) * 4.0 )/4095;
 }
 
 /*

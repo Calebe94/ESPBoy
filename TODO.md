@@ -22,3 +22,7 @@
 - [] port sega master system emulator
 - [] port nintendo gameboy emulator
 - [] port sega game gear emulator
+
+### BUGS:
+
+- [] When keyboard is enable the battery manager doesn't read the right battery level.

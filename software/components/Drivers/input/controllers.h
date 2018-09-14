@@ -2,7 +2,7 @@
 #define _CONTROLLERS_H_
 
 #include <stdint.h>
-
+#include "hal_keypad.h"
 /*
     Nintendo Entertainement System controller format that nofrendo recognizes
 */
