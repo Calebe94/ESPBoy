@@ -22,6 +22,7 @@
 - [] port sega master system emulator
 - [] port nintendo gameboy emulator
 - [] port sega game gear emulator
+- [] Add Setup topic to README.md
 
 ### BUGS:
 

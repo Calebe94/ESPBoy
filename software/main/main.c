@@ -34,11 +34,11 @@ void lvgl_run();
 
 int app_main(void)
 {
-  modules_init();
-  nes_run();
+  	modules_init();
+  	// nes_run();
 	lvgl_run();
 
-  return 0;
+  	return 0;
 }
 
 void lvgl_run()
