@@ -71,7 +71,7 @@ uint16_t raw_keypad_read()
 	{
 		VOL_DOWN = 0;
 	}
-    printf("joy_x: %d = joy_y: %d = joy_vol: %d\n", joy_x, joy_y, joy_vol);
+    // printf("joy_x: %d = joy_y: %d = joy_vol: %d - ", joy_x, joy_y, joy_vol);
     printf("U:%d=D:%d=L:%d=R:%d=B:%d=A:%d=ST:%d=SEL:%d=M:%d=+:%d=-:%d\n",BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A, BUTTON_START, BUTTON_SELECT, BUTTON_MENU, VOL_UP, VOL_DOWN);
     byte_1 = (BUTTON_B<<5) | (BUTTON_A<<4) | (BUTTON_RIGHT<<3) | (BUTTON_LEFT<<2) | (BUTTON_DOWN<<1) | (BUTTON_UP<<0);
     byte_2 = (BUTTON_SELECT<<4) | (BUTTON_START<<3) | (VOL_UP<<2) | (VOL_DOWN<<1) | BUTTON_MENU; 

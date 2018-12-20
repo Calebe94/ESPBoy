@@ -6,7 +6,7 @@
 /*
     Initialize the power manager wich will read the battery's voltage level
 */
-void battery_manager_init();
+void battery_init();
 
 /*
     Get the voltage value from 0V to approximatelly 3.3V

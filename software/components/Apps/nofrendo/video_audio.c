@@ -366,7 +366,8 @@ int osd_init()
 
 	audio_amplifier_init();
 	jack_sense_init();
-	battery_manager_init();
+	// battery_manager_init();
+	battery_init();
 
 	return 0;
 }

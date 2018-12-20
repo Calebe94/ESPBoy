@@ -71,7 +71,7 @@ void gui_update(screen_t *screen, uint32_t total_mem, uint32_t free_mem, float b
     lv_label_set_text((*screen).label_flash, buffer);
 
     memset(buffer, 0, strlen(buffer));
-    sprintf(buffer, "%.1f V", bat_level);
+    sprintf(buffer, "BAT: %.1f V\n", bat_level);
     printf(buffer);
     
     lv_label_set_text((*screen).label_battery, buffer);

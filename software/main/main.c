@@ -34,7 +34,8 @@ void lvgl_run();
 
 int app_main(void)
 {
-  	modules_init();
+  	// modules_init();
+	  os_init();
   	// nes_run();
 	lvgl_run();
 
@@ -67,14 +68,10 @@ void lvgl_run()
 	
 	while(1)
     {
-		vTaskDelay(1);
-        delay++;
-        if(delay == 1000)
-        {
-            gui_update(&screen, 4, 3, get_battery_voltage());
-            delay = 0;
-        }
+        gui_update(&screen, 4, 3, get_battery_voltage());
+		
 		lv_task_handler();
+		vTaskDelay(1000);
 	}
 }
 

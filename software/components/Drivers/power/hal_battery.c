@@ -5,15 +5,20 @@
 #include <driver/adc.h>
 #include <driver/gpio.h>
 
+#include "esp_adc_cal.h"
+
 #include "hal_battery.h"
 #include "pins.h"
 
 /*
     Initialize the power manager wich will read the battery's voltage level
 */
-void battery_manager_init()
+void battery_init()
 {
-	  adc1_config_channel_atten(BAT_LEVEL, ADC_ATTEN_11db);
+    adc1_config_width(ADC_WIDTH_BIT_12);
+    // adc1_config_channel_atten(ADC1_CHANNEL_0,ADC_ATTEN_DB_0);
+
+	adc1_config_channel_atten(BAT_LEVEL, ADC_ATTEN_DB_0);
     adc1_config_channel_atten(CHARGING_SENSIGN, ADC_ATTEN_11db);
 }
 
@@ -22,7 +27,8 @@ void battery_manager_init()
 */
 float get_battery_voltage()
 {
-    return (float)(adc1_get_raw(BAT_LEVEL) * 4.0 )/4095;
+    // return esp_adc_cal_raw_to_voltage(adc1_get_raw(BAT_LEVEL), adc_chars);
+    return (float)(adc1_get_raw(BAT_LEVEL) * 4.0 * 3.3)/4095;
 }
 
 /*
