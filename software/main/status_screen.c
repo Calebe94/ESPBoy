@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include "status_screen.h"
 #include "lvgl.h"
+#include "system.h"
 
 screen_t gui_create(void)
 {
@@ -71,8 +72,10 @@ void gui_update(screen_t *screen, uint32_t total_mem, uint32_t free_mem, float b
     lv_label_set_text((*screen).label_flash, buffer);
 
     memset(buffer, 0, strlen(buffer));
-    sprintf(buffer, "BAT: %.1f V\n", bat_level);
+    sprintf(buffer, "BAT: %.2f V\n", bat_level);
+    #ifndef DEBUG == 1
     printf(buffer);
+    #endif
     
     lv_label_set_text((*screen).label_battery, buffer);
 

@@ -14,7 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Audio p2 connector can be detected.
 * Audio amplifier now can be turned on/off if the p2 connector is detected.
 * Battery level can be mesured.
+* Added [Collections-C](https://github.com/srdja/Collections-C ) submodule
+* Added [Sort](https://github.com/p1v0t/Sort) submodule
+* Added [lvgl]()http://github.com/littlevgl/lvgl submodule
+* Added battery manager
+* Added modules_init
+* Added manager_init
 
 ### Removed
-
-* lvgl and lv_examples (KairOS will be added soon).

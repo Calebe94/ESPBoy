@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#define DEBUG  0
+
+#define BATTERY_DEBUG       1
+
 typedef int8_t err_t;
 
 #define RESP_OK            0

@@ -23,6 +23,9 @@
 - [] port nintendo gameboy emulator
 - [] port sega game gear emulator
 - [] Add Setup topic to README.md
+- [x] Should have a .h file called managers.h which include all managers, just like modules.h have
+- [x] Should create a task to update the managers
+- [] Add resolution do battery porcentage measurement.
 
 ### BUGS:
 

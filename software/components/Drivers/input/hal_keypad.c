@@ -10,10 +10,12 @@
 #include "pins.h"
 #include "hal_keypad.h"
 
+#include "system.h"
+
 void keypad_init(void)
 {
 	adc1_config_width(ADC_WIDTH_12Bit);
-  adc1_config_channel_atten(JOY_X_AXIS, ADC_ATTEN_11db);
+    adc1_config_channel_atten(JOY_X_AXIS, ADC_ATTEN_11db);
 	adc1_config_channel_atten(JOY_Y_AXIS, ADC_ATTEN_11db);
 	adc1_config_channel_atten(JOY_VOL, ADC_ATTEN_11db);
 
@@ -27,13 +29,13 @@ void keypad_init(void)
 	gpio_set_direction(JOY_START, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_A, GPIO_MODE_INPUT);
 	gpio_set_direction(JOY_B, GPIO_MODE_INPUT);
-  gpio_set_direction(JOY_MENU, GPIO_MODE_INPUT);
+    gpio_set_direction(JOY_MENU, GPIO_MODE_INPUT);
 
 	gpio_set_pull_mode(JOY_SELECT, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_START, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_A, GPIO_PULLUP_ONLY);
 	gpio_set_pull_mode(JOY_B, GPIO_PULLUP_ONLY);
-  gpio_set_pull_mode(JOY_MENU, GPIO_PULLUP_ONLY);
+    gpio_set_pull_mode(JOY_MENU, GPIO_PULLUP_ONLY);
 }
 
 uint16_t raw_keypad_read()
@@ -72,7 +74,10 @@ uint16_t raw_keypad_read()
 		VOL_DOWN = 0;
 	}
     // printf("joy_x: %d = joy_y: %d = joy_vol: %d - ", joy_x, joy_y, joy_vol);
-    printf("U:%d=D:%d=L:%d=R:%d=B:%d=A:%d=ST:%d=SEL:%d=M:%d=+:%d=-:%d\n",BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A, BUTTON_START, BUTTON_SELECT, BUTTON_MENU, VOL_UP, VOL_DOWN);
+
+    #if DEBUG
+        printf("U:%d=D:%d=L:%d=R:%d=B:%d=A:%d=ST:%d=SEL:%d=M:%d=+:%d=-:%d\n",BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A, BUTTON_START, BUTTON_SELECT, BUTTON_MENU, VOL_UP, VOL_DOWN);
+    #endif
     byte_1 = (BUTTON_B<<5) | (BUTTON_A<<4) | (BUTTON_RIGHT<<3) | (BUTTON_LEFT<<2) | (BUTTON_DOWN<<1) | (BUTTON_UP<<0);
     byte_2 = (BUTTON_SELECT<<4) | (BUTTON_START<<3) | (VOL_UP<<2) | (VOL_DOWN<<1) | BUTTON_MENU; 
     

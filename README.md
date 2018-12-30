@@ -32,7 +32,22 @@ This portable console is(or must be) capable to emulate games from the 4º gener
 
 # Setup
 
-Comming soon...
+Clone the repo:
+
+```
+git clone https://github.com/Calebe94/ESPBoy
+
+cd ESPBoy/software
+
+git submodule update --init .
+
+cp ../utils/makefiles/lvgl_component.mk components/Libs/lvgl/component.mk
+
+make all
+
+make flash
+```
+
 
 # Team
 

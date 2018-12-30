@@ -1,7 +1,6 @@
 #ifndef _MODULES_H_
 #define _MODULES_H_
 
-
 #include "system.h"
 #include "audio/hal_audio.h"
 #include "display/disp_spi.h"

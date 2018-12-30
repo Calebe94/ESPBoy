@@ -22,6 +22,8 @@
 #include "hal_keypad.h"
 #include "status_screen.h"
 
+#include "battery_manager.h"
+
 static void lv_tick_task(void);
 
 char *osd_getromdata();
@@ -34,8 +36,7 @@ void lvgl_run();
 
 int app_main(void)
 {
-  	// modules_init();
-	  os_init();
+	os_init();
   	// nes_run();
 	lvgl_run();
 
@@ -68,9 +69,12 @@ void lvgl_run()
 	
 	while(1)
     {
-        gui_update(&screen, 4, 3, get_battery_voltage());
+		// TODO: should have a task to update the managers
+
+        gui_update(&screen, 4, 3, battery_voltage());
 		
 		lv_task_handler();
+
 		vTaskDelay(1000);
 	}
 }

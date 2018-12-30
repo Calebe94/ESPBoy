@@ -1,3 +1,9 @@
 [submodule "software/components/Libs/lvgl"]
 	path = software/components/Libs/lvgl
 	url = http://github.com/littlevgl/lvgl
+[submodule "software/components/Libs/Sort"]
+	path = software/components/Libs/Sort
+	url = https://github.com/p1v0t/Sort
+[submodule "software/components/Libs/Collections-C"]
+	path = software/components/Libs/Collections-C
+	url = https://github.com/srdja/Collections-C

@@ -1,27 +1,15 @@
 #include "sysinit.h"
 #include "modules.h"
-// #include "hal_audio.h"
-// #include "hal_battery.h"
-// #include "hal_keypad.h"
-// #include "disp_spi.h"
-// #include "ili9341.h"
+#include "manager.h"
 
-// err_t modules_init(void)
-// {
-//     disp_spi_init();
-//     ili9431_init();
-//     jack_sense_init();
-//     audio_amplifier_init();
-//     amplifier_set_off();
-//     battery_manager_init();
-    
-//     keypad_init();
-    
-//     return RESP_OK;
-// }
+// TODO: Should have a .h file called managers.h which include all managers, just like modules.h have
+#include "battery_manager.h"
 
 err_t os_init(void)
 {
     modules_init();
+
+    manager_init();
+
     return RESP_OK;
 }
