@@ -24,6 +24,8 @@
 
 #include "battery_manager.h"
 
+#include "launcher.h"
+
 static void lv_tick_task(void);
 
 char *osd_getromdata();
@@ -64,14 +66,16 @@ void lvgl_run()
 	lv_indev_drv_register(&indev_drv);     /*Register the driver in LittlevGL*/
 
 	// demo_create();
-	screen_t screen = gui_create();
-    uint16_t delay = 0;
+	// screen_t screen = gui_create();
+    // uint16_t delay = 0;
+	create_header();
+
 	
 	while(1)
     {
 		// TODO: should have a task to update the managers
 
-        gui_update(&screen, 4, 3, battery_voltage());
+        // gui_update(&screen, 4, 3, battery_voltage());
 		
 		lv_task_handler();
 

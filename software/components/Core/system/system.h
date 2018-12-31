@@ -53,4 +53,5 @@ typedef struct system_settings
     // theme
     // ...
 }sys_settings_t;
+
 #endif
