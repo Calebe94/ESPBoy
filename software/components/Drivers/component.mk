@@ -14,6 +14,6 @@ COMPONENT_SRCDIRS := . \
 	input \
 	power \
 	wifi \
-	ota_uploader \
+
 
 COMPONENT_ADD_INCLUDEDIRS := $(COMPONENT_SRCDIRS) ..

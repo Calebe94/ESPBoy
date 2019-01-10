@@ -32,8 +32,8 @@ typedef struct keypad
     uint8_t KEY_DOWN;
     uint8_t KEY_LEFT;
     uint8_t KEY_RIGHT;
-    uint8_t KEY_NEXT;
-    uint8_t KEY_PREV;
+    uint8_t KEY_A;
+    uint8_t KEY_B;
     uint8_t KEY_ENTER;
     uint8_t KEY_ESC;
 }keypad_t;

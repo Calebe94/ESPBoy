@@ -7,3 +7,9 @@
 [submodule "software/components/Libs/Collections-C"]
 	path = software/components/Libs/Collections-C
 	url = https://github.com/srdja/Collections-C
+[submodule "software/components/Libs/esp32-ota-server"]
+	path = software/components/Libs/esp32-ota-server
+	url = https://github.com/yanbe/esp32-ota-server
+[submodule "software/components/Apps/launcher"]
+	path = software/components/Apps/launcher
+	url = https://github.com/Calebe94/espboy_launcher
