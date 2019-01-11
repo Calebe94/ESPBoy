@@ -40,8 +40,13 @@ void keypad_init(void)
 
 uint16_t raw_keypad_read()
 {
-	uint8_t BUTTON_UP = 1, BUTTON_DOWN = 1, BUTTON_LEFT = 1, BUTTON_RIGHT = 1, VOL_UP = 1, VOL_DOWN = 1;
 	uint8_t byte_1, byte_2;
+	uint8_t BUTTON_UP = 1;
+    uint8_t BUTTON_DOWN = 1;
+    uint8_t BUTTON_LEFT = 1;
+    uint8_t BUTTON_RIGHT = 1;
+    uint8_t VOL_UP = 1;
+    uint8_t VOL_DOWN = 1;
 
 	uint16_t joy_x = adc1_get_raw(JOY_X_AXIS);
     uint16_t joy_y = adc1_get_raw(JOY_Y_AXIS);
@@ -75,9 +80,9 @@ uint16_t raw_keypad_read()
 	}
     // printf("joy_x: %d = joy_y: %d = joy_vol: %d - ", joy_x, joy_y, joy_vol);
 
-    #if DEBUG
-        printf("U:%d=D:%d=L:%d=R:%d=B:%d=A:%d=ST:%d=SEL:%d=M:%d=+:%d=-:%d\n",BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A, BUTTON_START, BUTTON_SELECT, BUTTON_MENU, VOL_UP, VOL_DOWN);
-    #endif
+    // #if DEBUG
+        // printf("U:%d=D:%d=L:%d=R:%d=B:%d=A:%d=ST:%d=SEL:%d=M:%d=+:%d=-:%d\n",BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_B, BUTTON_A, BUTTON_START, BUTTON_SELECT, BUTTON_MENU, VOL_UP, VOL_DOWN);
+    // #endif
     byte_1 = (BUTTON_B<<5) | (BUTTON_A<<4) | (BUTTON_RIGHT<<3) | (BUTTON_LEFT<<2) | (BUTTON_DOWN<<1) | (BUTTON_UP<<0);
     byte_2 = (BUTTON_SELECT<<4) | (BUTTON_START<<3) | (VOL_UP<<2) | (VOL_DOWN<<1) | BUTTON_MENU; 
     
@@ -90,37 +95,37 @@ bool lv_keypad_read(lv_indev_data_t *data)
     
     if((raw_input&0x01) == 0)
     {
-       // printf("UP\n");
+       printf("UP\n");
         data->state = LV_INDEV_STATE_PR;
         data->key = LV_GROUP_KEY_UP;
     }
     else if((raw_input&0x02) == 0)
     {
-       // printf("DOWN\n");
+       printf("DOWN\n");
         data->state = LV_INDEV_STATE_PR;
         data->key = LV_GROUP_KEY_DOWN;
     }
     else if((raw_input&0x04) == 0) 
     {
-       // printf("LEFT\n");
+       printf("LEFT\n");
         data->state = LV_INDEV_STATE_PR;
         data->key = LV_GROUP_KEY_LEFT;
     }
     else if((raw_input&0x08) == 0)
     {
-       // printf("RIGHT\n");
+       printf("RIGHT\n");
         data->state = LV_INDEV_STATE_PR;
         data->key = LV_GROUP_KEY_RIGHT;
     }
-    else if((raw_input&0x16) == 0)
+    else if((BUTTON_A) == 0)
     {
-       // printf("ESC\n");
+        printf("ESC\n");
         data->state = LV_INDEV_STATE_PR;
         data->key = LV_GROUP_KEY_ESC;
     }
-    else if((raw_input&0x32) == 0)
+    else if((BUTTON_B) == 0)
     { 
-       // printf("ENTER\n");
+        printf("ENTER\n");
         data->state = LV_INDEV_STATE_PR;
         data->key = LV_GROUP_KEY_ENTER;
     }

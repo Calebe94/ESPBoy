@@ -21,15 +21,17 @@ void manager_init()
     // lvgl_init();
     ota_manager_init();
 
-	xTaskCreatePinnedToCore(
-        &manager_update,    /* Function that implements the task. */
-        "manager_update",   /* Text name for the task. */
-        2048,               /* Stack size in words, not bytes. */
-        NULL,               /* Parameter passed into the task. */
-        5,                  /* Priority at which the task is created. */
-        NULL, 
-        1
-    );
+    ui_manager_init();
+
+	// xTaskCreatePinnedToCore(
+    //     &manager_update,    /* Function that implements the task. */
+    //     "manager_update",   /* Text name for the task. */
+    //     2048,               /* Stack size in words, not bytes. */
+    //     NULL,               /* Parameter passed into the task. */
+    //     5,                  /* Priority at which the task is created. */
+    //     NULL, 
+    //     1
+    // );
 }
 
 void manager_update()

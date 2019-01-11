@@ -1,4 +1,5 @@
 
+#include <stdio.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include "esp_freertos_hooks.h"
@@ -15,6 +16,12 @@
 
 void ui_manager_init(void)
 {
+	// xTaskCreatePinnedToCore(&ui_manager_update, "ui_manager_update", 1024 * 2, NULL, 5, NULL, 0);
+	xTaskCreate(&ui_manager_update, "ui_manager_update", 4096, NULL, 5, NULL);
+}
+
+void ui_manager_update(void)
+{	
 	lv_init();
 
 	lv_disp_drv_t disp;
@@ -22,6 +29,7 @@ void ui_manager_init(void)
 	disp.disp_flush = ili9431_flush;
 	lv_disp_drv_register(&disp);
 
+    // xTaskCreatePinnedToCore(&lv_tick_task, "lv_tick_task", 1024 * 2, NULL, 5, NULL, 1);
 	esp_register_freertos_tick_hook(lv_tick_task);
 
 	lv_indev_drv_t indev_drv;
@@ -29,29 +37,32 @@ void ui_manager_init(void)
 	indev_drv.type = LV_INDEV_TYPE_KEYPAD;              /*See below.*/
 	indev_drv.read = lv_keypad_read;           /*See below.*/
 	lv_indev_drv_register(&indev_drv);     /*Register the driver in LittlevGL*/
+	lv_indev_t * indev = lv_indev_drv_register(&indev_drv);
+	lv_indev_init();
 
 	// create_header();
-    // launcher_init();
-	
-	// while(1)
-    // {
-	// 	// TODO: should have a task to update the managers
+    launcher_init(&indev);
 
-    //     // gui_update(&screen, 4, 3, battery_voltage());
+	while(1)
+    {
+		// TODO: should have a task to update the managers
+
+        // gui_update(&screen, 4, 3, battery_voltage());
 		
-	// 	lv_task_handler();
+		// printf("Interation!\n");
+		
+		lv_task_handler();
 
-	// 	vTaskDelay(1000);
-	// }
-}
-
-void ui_manager_update(void)
-{	
-	lv_task_handler();
-	// vTaskDelay(1000);
+		vTaskDelay(100/portTICK_PERIOD_MS);
+	}
 }
 
 static void lv_tick_task(void)
 {
+    // while(1)
+    // {
+    //     lv_tick_inc(portTICK_RATE_MS);
+    //     vTaskDelay(1);
+    // }
 	lv_tick_inc(portTICK_RATE_MS);
 }

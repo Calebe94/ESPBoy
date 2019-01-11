@@ -16,8 +16,6 @@
 
 #include "sysinit.h"
 
-#include "Kernel/daemon/ota_manager.h"
-
 char *osd_getromdata();
 
 esp_err_t event_handler(void *ctx, system_event_t *event);

@@ -12,7 +12,7 @@ err_t os_init(void)
     manager_init();
 
     // Init the System APPS
-    system_apps_init();
+    // system_apps_init();
 
     return RESP_OK;
 }
