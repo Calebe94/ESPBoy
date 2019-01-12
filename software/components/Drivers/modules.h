@@ -5,14 +5,13 @@
 
 #include "nvs_flash.h"
 
-#include "system.h"
+#include "k_config.h"
 #include "audio/hal_audio.h"
 #include "display/disp_spi.h"
 #include "display/ili9341.h"
 #include "display/spi_lcd.h"
 #include "input/controllers.h"
 #include "input/hal_keypad.h"
-#include "input/psxcontroller.h"
 #include "power/hal_battery.h"
 #include "wifi/wifi.h"
 

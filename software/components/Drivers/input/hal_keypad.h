@@ -2,8 +2,22 @@
 #define _INPUTS_H_
 
 #include <stdint.h>
-#include <stdbool.h>
-#include "lvgl/lv_hal/lv_hal_indev.h"
+
+#define HAL_KEY_UP      0x01    // (button_up<<0)
+#define HAL_KEY_DOWN    0x02    // (button_down<<1)
+#define HAL_KEY_LEFT    0x04    // (button_left<<2)
+#define HAL_KEY_RIGHT   0x08    // (button_right<<3)
+#define HAL_KEY_A       0x10    // (button_a<<4)
+#define HAL_KEY_B       0x20    // (button_b<<5)
+#define HAL_KEY_MENU    0x40    // (button_menu<<6)
+#define HAL_KEY_VOL_D   0x80    // (vol_down<<7)
+#define HAL_KEY_VOL_U   0x100   // (vol_up<<8)
+#define HAL_KEY_SELECT  0x200   // (button_select<<9) 
+#define HAL_KEY_START   0x400   // (button_start<<10)
+
+#define HAL_KEY_PRESSED     0
+#define HAL_KEY_RELEASED    1
+
 
 void keypad_init(void);
 
@@ -24,6 +38,6 @@ void keypad_init(void);
 */
 uint16_t raw_keypad_read();
 
-bool lv_keypad_read(lv_indev_data_t *data);
+// bool lv_keypad_read(lv_indev_data_t *data);
 
 #endif

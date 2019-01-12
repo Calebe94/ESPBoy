@@ -8,19 +8,20 @@
 
 #include "ili9341.h"
 #include "ui_manager.h"
-#include "hal_keypad.h"
+// #include "hal_keypad.h"
+#include "input_manager.h"
 
 #include "launcher.h"
 
 // static void lvgl_init(void);
 
-void ui_manager_init(void)
+void ui_manager_init()
 {
 	// xTaskCreatePinnedToCore(&ui_manager_update, "ui_manager_update", 1024 * 2, NULL, 5, NULL, 0);
 	xTaskCreate(&ui_manager_update, "ui_manager_update", 4096, NULL, 5, NULL);
 }
 
-void ui_manager_update(void)
+void ui_manager_update(void *args)
 {	
 	lv_init();
 
@@ -30,7 +31,7 @@ void ui_manager_update(void)
 	lv_disp_drv_register(&disp);
 
     // xTaskCreatePinnedToCore(&lv_tick_task, "lv_tick_task", 1024 * 2, NULL, 5, NULL, 1);
-	esp_register_freertos_tick_hook(lv_tick_task);
+	// esp_register_freertos_tick_hook(lv_tick_task);
 
 	lv_indev_drv_t indev_drv;
 	lv_indev_drv_init(&indev_drv);     /*Basic initialization*/
@@ -41,7 +42,7 @@ void ui_manager_update(void)
 	lv_indev_init();
 
 	// create_header();
-    launcher_init(&indev);
+    launcher_init(indev);
 
 	while(1)
     {
@@ -53,7 +54,9 @@ void ui_manager_update(void)
 		
 		lv_task_handler();
 
-		vTaskDelay(100/portTICK_PERIOD_MS);
+		vTaskDelay(10/portTICK_PERIOD_MS);
+
+		lv_tick_inc(10/portTICK_RATE_MS);
 	}
 }
 

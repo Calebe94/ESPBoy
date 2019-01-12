@@ -3,7 +3,7 @@
 #include "array.h"
 #include "bubble.h"
 #include "k_utils.h"
-#include "system.h"
+#include "k_config.h"
 
 #if BATTERY_DEBUG
 #include <stdio.h>

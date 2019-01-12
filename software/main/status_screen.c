@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "status_screen.h"
 #include "lvgl.h"
-#include "system.h"
+#include "k_config.h"
 
 screen_t gui_create(void)
 {

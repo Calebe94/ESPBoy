@@ -83,6 +83,6 @@ static void ota_server_task(void * param)
  **********************/
 void ota_manager_init(void)
 {
-    // initialise_wifi();
-    // xTaskCreate(&ota_server_task, "ota_server_task", 4096, NULL, 5, NULL);
+    initialise_wifi();
+    xTaskCreate(&ota_server_task, "ota_server_task", 4096, NULL, 5, NULL);
 }

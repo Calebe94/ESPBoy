@@ -1,12 +1,15 @@
 #ifndef _INPUT_MANAGER_H_
 #define _INPUT_MANAGER_H_
 
-#include "system.h"
+#include "k_config.h"
 
-keypad_t *keypad_init();
+void keypad_manager_init();
 
-err_t keypad_update(keypad_t *keypad);
+void keypad_update();
+// err_t keypad_update(keypad_t *keypad);
 
-err_t keypad_read(keypad_t *keypad);
+// err_t keypad_read(keypad_t *keypad);
+
+bool lv_keypad_read(lv_indev_data_t *data);
 
 #endif
