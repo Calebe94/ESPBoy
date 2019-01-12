@@ -24,10 +24,10 @@
 - [] port sega master system emulator. See [PocketSprite](https://github.com/PocketSprite) or [ODROID-GO](https://github.com/OtherCrashOverride/go-play)
 - [] port nintendo gameboy emulator. See [PocketSprite](https://github.com/PocketSprite) or [ODROID-GO](https://github.com/OtherCrashOverride/go-play)
 - [] port sega game gear emulator. See [PocketSprite](https://github.com/PocketSprite) or [ODROID-GO](https://github.com/OtherCrashOverride/go-play)
-- [] Add Setup topic to README.md
+- [x] Add Setup topic to README.md
 - [] Add resolution do battery porcentage measurement.
-- [] Add OTA(Over the Air Update) to upload new firmware via wifi
-- [] Make **lvgl** recognize ESPBoy's keyboard. [see lvgl issue #527](https://github.com/littlevgl/lvgl/issues/527)
+- [x] Add OTA(Over the Air Update) to upload new firmware via wifi
+- [x] Make **lvgl** recognize ESPBoy's keyboard. [see lvgl issue #527](https://github.com/littlevgl/lvgl/issues/527)
 
 ### BUGS:
 
