@@ -26,6 +26,7 @@
 - [x] Should have a .h file called managers.h which include all managers, just like modules.h have
 - [x] Should create a task to update the managers
 - [] Add resolution do battery porcentage measurement.
+- [] Add [SQLite](https://github.com/siara-cc/esp32-idf-sqlite3) to project. 
 
 ### BUGS:
 
