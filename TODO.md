@@ -28,6 +28,7 @@
 - [] Add resolution do battery porcentage measurement.
 - [x] Add OTA(Over the Air Update) to upload new firmware via wifi
 - [x] Make **lvgl** recognize ESPBoy's keyboard. [see lvgl issue #527](https://github.com/littlevgl/lvgl/issues/527)
+- [] Add [SQLite](https://github.com/siara-cc/esp32-idf-sqlite3) to project. 
 
 ### BUGS:
 
