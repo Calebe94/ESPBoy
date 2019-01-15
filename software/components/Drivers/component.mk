@@ -8,5 +8,12 @@
 #
 
 # COMPONENT_DEPENDS := nofrendo
-COMPONENT_SRCDIRS := . audio display input power
+COMPONENT_SRCDIRS := . \
+	audio \
+	display \
+	input \
+	power \
+	wifi \
+
+
 COMPONENT_ADD_INCLUDEDIRS := $(COMPONENT_SRCDIRS) ..

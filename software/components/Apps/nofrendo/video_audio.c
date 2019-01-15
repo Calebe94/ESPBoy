@@ -38,9 +38,10 @@
 #include "sdkconfig.h"
 #include <spi_lcd.h>
 
-#include <psxcontroller.h>
+// #include <psxcontroller.h>
 
 #include <hal_audio.h>
+#include <hal_keypad.h>
 #include <hal_battery.h>
 
 #define  DEFAULT_SAMPLERATE   22100
@@ -283,7 +284,8 @@ static void videoTask(void *arg) {
 
 static void osd_initinput()
 {
-	psxcontrollerInit();
+	// psxcontrollerInit();
+	keypad_init();
 }
 
 void osd_getinput(void)
@@ -307,7 +309,7 @@ void osd_getinput(void)
 			event_hard_reset
 		};
 	static int oldb=0xffff;
-	int b=psxReadInput();
+	int b=raw_keypad_read();
 	int chg=b^oldb;
 	int x;
 	oldb=b;

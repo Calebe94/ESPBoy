@@ -8,8 +8,22 @@
 #
 
 
-COMPONENT_ADD_INCLUDEDIRS :=  nofrendo . nofrendo/cpu nofrendo/libsnss nofrendo/nes nofrendo/sndhrdw 
-COMPONENT_SRCDIRS :=  nofrendo . nofrendo/cpu nofrendo/libsnss nofrendo/nes nofrendo/sndhrdw nofrendo/mappers
+COMPONENT_ADD_INCLUDEDIRS := . \
+	nofrendo \
+	nofrendo/cpu \
+	nofrendo/libsnss \
+	nofrendo/nes \
+	nofrendo/sndhrdw \
+	launcher \
+
+COMPONENT_SRCDIRS := . \
+	nofrendo \
+	nofrendo/cpu \
+	nofrendo/libsnss \
+	nofrendo/nes \
+	nofrendo/sndhrdw \
+	nofrendo/mappers \
+	launcher \
 
 CFLAGS += -Wno-error=char-subscripts -Wno-error=attributes -DNOFRENDO_DEBUG
 

@@ -1,7 +1,7 @@
 #ifndef _BATERY_MANAGER_H_
 #define _BATERY_MANAGER_H_
 
-#include "system.h"
+#include "k_config.h"
 #include "array.h"
 
 // Array *readings;

@@ -53,3 +53,5 @@ dkms.conf
 
 build/
 sdkconfig.old
+.vscode/
+.DS_Store

@@ -3,7 +3,7 @@
 #define _LINKED_LIST_H_
 
 #include <stddef.h>
-#include "system.h"
+#include "k_config.h"
 
 struct linked_list {
     struct linked_list *next;
