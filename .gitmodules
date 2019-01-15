@@ -1,15 +1,15 @@
 [submodule "software/components/Libs/lvgl"]
 	path = software/components/Libs/lvgl
-	url = http://github.com/littlevgl/lvgl
+	url = http://github.com/littlevgl/lvgl.git
 [submodule "software/components/Libs/Sort"]
 	path = software/components/Libs/Sort
-	url = https://github.com/p1v0t/Sort
+	url = https://github.com/p1v0t/Sort.git
 [submodule "software/components/Libs/Collections-C"]
 	path = software/components/Libs/Collections-C
-	url = https://github.com/srdja/Collections-C
+	url = https://github.com/srdja/Collections-C.git
 [submodule "software/components/Libs/esp32-ota-server"]
 	path = software/components/Libs/esp32-ota-server
-	url = https://github.com/yanbe/esp32-ota-server
+	url = https://github.com/yanbe/esp32-ota-server.git
 [submodule "software/components/Apps/launcher"]
 	path = software/components/Apps/launcher
-	url = https://github.com/Calebe94/espboy_launcher
+	url = https://github.com/Calebe94/espboy_launcher.git
