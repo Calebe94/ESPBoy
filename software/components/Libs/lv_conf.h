@@ -118,10 +118,10 @@
 #define USE_LV_FONT_DEJAVU_30_CYRILLIC     0
 #define USE_LV_FONT_SYMBOL_30              0
 
-#define USE_LV_FONT_DEJAVU_40              0
+#define USE_LV_FONT_DEJAVU_40              8
 #define USE_LV_FONT_DEJAVU_40_LATIN_SUP    0
 #define USE_LV_FONT_DEJAVU_40_CYRILLIC     0
-#define USE_LV_FONT_SYMBOL_40              0
+#define USE_LV_FONT_SYMBOL_40              8
 
 /*===================
  *  LV_OBJ SETTINGS
@@ -239,5 +239,15 @@
 
 /*Switch (dependencies: lv_slider)*/
 #define USE_LV_SW       1
+
+/*Arc (dependencies: -)*/
+#define USE_LV_ARC      1
+
+/*Preload (dependencies: arc)*/
+#define USE_LV_PRELOAD      1
+#if USE_LV_PRELOAD != 0
+#define LV_PRELOAD_DEF_ARC_LENGTH   60      /*[deg]*/
+#define LV_PRELOAD_DEF_SPIN_TIME    1000    /*[ms]*/
+#endif
 
 #endif /*LV_CONF_H*/

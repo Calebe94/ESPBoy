@@ -6,7 +6,7 @@
 #define DEBUG               0
 #define KEYPAD_DEBUG        0
 #define BATTERY_DEBUG       0
-#define INPUT_MONITOR_DEBUG 0
+#define INPUT_MONITOR_DEBUG 1
 #define OTA_MONITOR_DEBUG   0
 
 #define RESP_OK             0

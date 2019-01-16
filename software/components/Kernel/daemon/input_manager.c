@@ -60,14 +60,15 @@ void keypad_update()
         #if INPUT_MONITOR_DEBUG
             ESP_LOGI(TAG, "KEY_PRESSED: A");
         #endif
-        key_pressed = LV_GROUP_KEY_NEXT;
+        key_status = LV_INDEV_STATE_REL;
     }
     else if((raw_input&HAL_KEY_B) == HAL_KEY_PRESSED)
     {
         #if INPUT_MONITOR_DEBUG
             ESP_LOGI(TAG, "KEY_PRESSED: B");
         #endif
-        key_pressed = LV_GROUP_KEY_ENTER;
+        key_status = LV_INDEV_STATE_REL;
+        // key_pressed = LV_GROUP_KEY_ENTER;
     }
     else if((raw_input&HAL_KEY_MENU) == HAL_KEY_PRESSED)
     {
@@ -75,6 +76,38 @@ void keypad_update()
             ESP_LOGI(TAG, "KEY_PRESSED: MENU");
         #endif
         key_pressed = LV_GROUP_KEY_ESC;
+    }
+    else if((raw_input&HAL_KEY_VOL_D) == HAL_KEY_PRESSED)
+    {
+        #if INPUT_MONITOR_DEBUG
+            ESP_LOGI(TAG, "KEY_PRESSED: VOLUME_DOWN");
+        #endif
+        key_status = LV_INDEV_STATE_REL;
+        // key_pressed = LV_GROUP_KEY_ESC;
+    }
+    else if((raw_input&HAL_KEY_VOL_U) == HAL_KEY_PRESSED)
+    {
+        #if INPUT_MONITOR_DEBUG
+            ESP_LOGI(TAG, "KEY_PRESSED: VOLUME_UP");
+        #endif
+        key_status = LV_INDEV_STATE_REL;
+        // key_pressed = LV_GROUP_KEY_ESC;
+    }
+    else if((raw_input&HAL_KEY_SELECT) == HAL_KEY_PRESSED)
+    {
+        #if INPUT_MONITOR_DEBUG
+            ESP_LOGI(TAG, "KEY_PRESSED: SELECT");
+        #endif
+        key_pressed = LV_GROUP_KEY_NEXT;
+        // key_pressed = LV_GROUP_KEY_ESC;
+    }
+    else if((raw_input&HAL_KEY_START) == HAL_KEY_PRESSED)
+    {
+        #if INPUT_MONITOR_DEBUG
+            ESP_LOGI(TAG, "KEY_PRESSED: START");
+        #endif
+        key_pressed = LV_GROUP_KEY_ENTER;
+        // key_pressed = LV_GROUP_KEY_ESC;
     }
     else
     {
@@ -86,10 +119,6 @@ bool lv_keypad_read(lv_indev_data_t *data)
 {
     data->state = key_status;
     data->key   = key_pressed;
-    #if INPUT_MONITOR_DEBUG
-        ESP_LOGI(TAG, "KEY_PRESSED:%d",key_pressed);
-        ESP_LOGI(TAG, "STATUS_KEY:%d", key_status);
-    #endif
-
+    
     return false;
 }
