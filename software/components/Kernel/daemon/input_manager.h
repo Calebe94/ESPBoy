@@ -2,6 +2,7 @@
 #define _INPUT_MANAGER_H_
 
 #include "k_config.h"
+#include "lv_indev.h"
 
 void keypad_manager_init();
 

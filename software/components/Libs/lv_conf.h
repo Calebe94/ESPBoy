@@ -240,10 +240,8 @@
 /*Switch (dependencies: lv_slider)*/
 #define USE_LV_SW       1
 
-/*Arc (dependencies: -)*/
-#define USE_LV_ARC      1
+#define USE_LV_ARC  1
 
-/*Preload (dependencies: arc)*/
 #define USE_LV_PRELOAD      1
 #if USE_LV_PRELOAD != 0
 #define LV_PRELOAD_DEF_ARC_LENGTH   60      /*[deg]*/

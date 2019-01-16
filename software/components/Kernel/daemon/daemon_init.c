@@ -1,28 +1,39 @@
-#ifndef _MANAGER_H_
-#define _MANAGER_H_
+/** @file launcher.c
+ * 
+ * @brief This module has the purpose to create the ESPBoy's game launcher. 
+ *
+ * @par       
+ * COPYRIGHT NOTICE: (c) 2018 Barr Group. All rights reserved.
+ */
 
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 
 #include "battery_manager.h"
-#include "ui_manager.h"
 #include "input_manager.h"
 #include "ota_manager.h"
 
-// #include "input_manager.h"
+#include "daemon_init.h"
 
-void manager_init();
+#define TEST_WITHOUT_UI_MANAGER     0
 
-void manager_update();
+#if TEST_WITHOUT_UI_MANAGER 
+    #include "lvgl.h"
+    #include "ili9341.h"
+    #include "splash_screen.h"
+#else
+    #include "ui_manager.h"
+#endif
 
 void manager_init()
 {
+    /* Start the main Task of the MinOS wich is the UI manager */
+    ui_manager_init();
+
     battery_manager_init();
 
-    // lvgl_init();
-    ota_manager_init();
+    // ota_manager_init();
 
-    ui_manager_init();
 	// xTaskCreate(&ui_manager_update, "ui_manager_update", 4096, NULL, 5, NULL);
 
 	xTaskCreate(
@@ -38,7 +49,7 @@ void manager_init()
 void manager_update()
 {
     while(1)
-    {
+    {   
         battery_update();
 
         keypad_update();
@@ -46,5 +57,3 @@ void manager_update()
         vTaskDelay(50);
     }
 }
-
-#endif
