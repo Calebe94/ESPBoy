@@ -3,14 +3,14 @@
 
 #include <stdint.h>
 
-#define DEBUG               0
-#define KEYPAD_DEBUG        0
-#define BATTERY_DEBUG       0
-#define INPUT_MONITOR_DEBUG 0
-#define OTA_MONITOR_DEBUG   0
+#define DEBUG                   0
+#define KEYPAD_DEBUG            0
+#define BATTERY_DEBUG           0
+#define INPUT_MONITOR_DEBUG     1
+#define OTA_MONITOR_DEBUG       0
 
-#define RESP_OK             0
-#define RESP_FAIL           1
+#define RESP_OK                 0
+#define RESP_FAIL               1
 
 typedef int8_t err_t;
 

@@ -1,6 +1,6 @@
 #include "sysinit.h"
 #include "modules.h"
-#include "../daemon/manager.h"
+#include "../daemon/daemon_init.h"
 #include "sys_apps.h"
 
 err_t os_init(void)

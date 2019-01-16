@@ -86,7 +86,7 @@ void ili9431_init(void)
 	vTaskDelay(100 / portTICK_RATE_MS);
 
 
-	printf("ILI9341 initialization.\n");
+	// printf("ILI9341 initialization.\n");
 
 
 	//Send all the commands

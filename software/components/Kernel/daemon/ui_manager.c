@@ -1,5 +1,7 @@
 
 #include <stdio.h>
+#include <stdbool.h>
+
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include "esp_freertos_hooks.h"
@@ -11,9 +13,11 @@
 // #include "hal_keypad.h"
 #include "input_manager.h"
 
+#include "splash_screen.h"
+#include "app_object.h"
 #include "launcher.h"
 
-// static void lvgl_init(void);
+static bool start_launcher;
 
 void ui_manager_init()
 {
@@ -41,22 +45,38 @@ void ui_manager_update(void *args)
 	lv_indev_t * indev = lv_indev_drv_register(&indev_drv);
 	lv_indev_init();
 
-	// create_header();
-    launcher_init(indev);
+	// app_t splash_screen = {
+	// 	.indev = indev,
+	// 	.init = splash_screen_init,
+	// 	.deinit = splash_screen_deinit
+	// };
+ 
+	// splash_screen.init(&splash_screen);
+
+	app_t launcher = {
+		.indev = indev,
+		.init = launcher_init,
+		.update = launcher_update,
+		.deinit = launcher_deinit
+	};
+
+	// launcher.init(&launcher);
+	APP_INIT(launcher);
 
 	while(1)
-    {
-		// TODO: should have a task to update the managers
-
-        // gui_update(&screen, 4, 3, battery_voltage());
-		
-		// printf("Interation!\n");
-		
+    {	
 		lv_task_handler();
 
-		vTaskDelay(10/portTICK_PERIOD_MS);
+		// launcher_update(&launcher);
 
-		lv_tick_inc(10/portTICK_RATE_MS);
+		// lv_tick_task();
+
+  		vTaskDelay(10/portTICK_PERIOD_MS);
+
+  		lv_tick_inc(10/portTICK_RATE_MS);
+
+		// TODO: should have a task to update the managers
+        // gui_update(&screen, 4, 3, battery_voltage());
 	}
 }
 
@@ -67,5 +87,9 @@ static void lv_tick_task(void)
     //     lv_tick_inc(portTICK_RATE_MS);
     //     vTaskDelay(1);
     // }
-	lv_tick_inc(portTICK_RATE_MS);
+
+	vTaskDelay(10/portTICK_PERIOD_MS);
+
+	lv_tick_inc(10/portTICK_RATE_MS);
+	// lv_tick_inc(portTICK_RATE_MS);
 }
