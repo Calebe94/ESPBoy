@@ -15,15 +15,7 @@
 
 #include "daemon_init.h"
 
-#define TEST_WITHOUT_UI_MANAGER     0
-
-#if TEST_WITHOUT_UI_MANAGER 
-    #include "lvgl.h"
-    #include "ili9341.h"
-    #include "splash_screen.h"
-#else
-    #include "ui_manager.h"
-#endif
+#include "ui_manager.h"
 
 void manager_init()
 {
@@ -34,7 +26,7 @@ void manager_init()
 
     // ota_manager_init();
 
-	// xTaskCreate(&ui_manager_update, "ui_manager_update", 4096, NULL, 5, NULL);
+    vTaskDelay(5000);
 
 	xTaskCreate(
         &manager_update,    /* Function that implements the task. */
@@ -48,12 +40,14 @@ void manager_init()
 
 void manager_update()
 {
+    ui_stop_splash_screen();
+
     while(1)
     {   
         battery_update();
 
         keypad_update();
-        // lvgl_update();
+
         vTaskDelay(50);
     }
 }

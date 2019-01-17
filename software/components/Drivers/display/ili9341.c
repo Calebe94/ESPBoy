@@ -76,14 +76,14 @@ void ili9431_init(void)
 
 	//Initialize non-SPI GPIOs
 	gpio_set_direction(ILI9341_DC, GPIO_MODE_OUTPUT);
-	gpio_set_direction(ILI9341_RST, GPIO_MODE_OUTPUT);
+	// gpio_set_direction(ILI9341_RST, GPIO_MODE_OUTPUT);
 	gpio_set_direction(ILI9341_BCKL, GPIO_MODE_OUTPUT);
 
 	//Reset the display
-	gpio_set_level(ILI9341_RST, 0);
-	vTaskDelay(100 / portTICK_RATE_MS);
-	gpio_set_level(ILI9341_RST, 1);
-	vTaskDelay(100 / portTICK_RATE_MS);
+	// gpio_set_level(ILI9341_RST, 0);
+	// vTaskDelay(100 / portTICK_RATE_MS);
+	// gpio_set_level(ILI9341_RST, 1);
+	// vTaskDelay(100 / portTICK_RATE_MS);
 
 
 	// printf("ILI9341 initialization.\n");
@@ -101,7 +101,7 @@ void ili9431_init(void)
 	}
 
 	///Enable backlight
-	printf("Enable backlight.\n");
+	// printf("Enable backlight.\n");
 	gpio_set_level(ILI9341_BCKL, 1);
 }
 

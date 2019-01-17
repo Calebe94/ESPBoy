@@ -13,12 +13,14 @@
 #include "input/controllers.h"
 #include "input/hal_keypad.h"
 #include "power/hal_battery.h"
+#include "storage/sdcard.h"
 #include "wifi/wifi.h"
 
 #include "pins.h"
 
 err_t modules_init(void)
 {
+    // sdcard_init();
     ESP_ERROR_CHECK( nvs_flash_init() );
     disp_spi_init();
     ili9431_init();
@@ -28,6 +30,7 @@ err_t modules_init(void)
     battery_init();
     
     keypad_init();
+
     
     // wifi_init();
     

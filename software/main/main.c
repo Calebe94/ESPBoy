@@ -16,6 +16,8 @@
 
 #include "sysinit.h"
 
+// #include "storage/odroid_sdcard.h"
+
 char *osd_getromdata();
 
 esp_err_t event_handler(void *ctx, system_event_t *event);
@@ -24,6 +26,7 @@ void nes_run();
 
 int app_main(void)
 {
+	// odroid_sdcard_open("/sd");
 	os_init();
 	// ota_manager_init();
   	// nes_run();
