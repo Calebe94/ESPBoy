@@ -48,6 +48,11 @@ make all
 make flash
 ```
 
+* To flash the code for the first time you should do:
+
+```
+make erase_flash partition_table flash monitor
+```
 
 # Team
 

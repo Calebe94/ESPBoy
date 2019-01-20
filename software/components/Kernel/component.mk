@@ -8,5 +8,5 @@
 #
 
 # COMPONENT_DEPENDS := nofrendo
-COMPONENT_SRCDIRS := . system manager
+COMPONENT_SRCDIRS := . system daemon
 COMPONENT_ADD_INCLUDEDIRS := $(COMPONENT_SRCDIRS) ..

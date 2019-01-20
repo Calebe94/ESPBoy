@@ -2,6 +2,8 @@
 #define _SYSTEM_H_
 
 #include <stdint.h>
+#include <stdbool.h>
+#include "minos_hal_indev.h"
 
 #define DEBUG               0
 #define KEYPAD_DEBUG        0
@@ -28,20 +30,6 @@ typedef struct power
     uint8_t charging;
 }power_t;
 
-typedef struct keypad
-{
-    uint8_t KEY_UP;
-    uint8_t KEY_DOWN;
-    uint8_t KEY_LEFT;
-    uint8_t KEY_RIGHT;
-    uint8_t KEY_A;
-    uint8_t KEY_B;
-    uint8_t KEY_MENU;
-    uint8_t KEY_VOL_U;
-    uint8_t KEY_VOL_D;
-    uint8_t KEY_ENTER;
-    uint8_t KEY_ESC;
-}keypad_t;
 
 typedef struct input
 {

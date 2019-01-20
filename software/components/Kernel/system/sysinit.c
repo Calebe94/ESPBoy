@@ -10,7 +10,7 @@ err_t os_init(void)
 
     // Load the managers
     manager_init();
-
+    
     // Init the System APPS
     // system_apps_init();
 

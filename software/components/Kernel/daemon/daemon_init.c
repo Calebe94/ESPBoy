@@ -16,6 +16,9 @@
 #include "daemon_init.h"
 
 #include "ui_manager.h"
+// #include "../../Libs/sqlite3_connector/sqlite3_conn.h"
+#include "sqlite3_conn.h"
+#include "user_data.h"
 
 void manager_init()
 {
@@ -24,9 +27,13 @@ void manager_init()
 
     battery_manager_init();
 
-    // ota_manager_init();
+    ota_manager_init();
+    // Libs Init 
+    db_init();
 
-    vTaskDelay(5000);
+    // user_data_init();
+
+    vTaskDelay(3000);
 
 	xTaskCreate(
         &manager_update,    /* Function that implements the task. */

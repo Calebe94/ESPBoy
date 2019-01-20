@@ -7,6 +7,8 @@
 #include "hal_keypad.h"
 #include "input_manager.h"
 
+#include "minos_hal_indev.h"
+
 #include "k_config.h"
 
 static const char * TAG = "INPUT_MANAGER";
@@ -14,11 +16,13 @@ static const char * TAG = "INPUT_MANAGER";
 
 static uint8_t key_pressed;
 static uint8_t key_status;
+static unsigned int pressed_key_time;
 
 void keypad_manager_init()
 {
     key_pressed = 0; // NONE
     key_status  = 0;
+    pressed_key_time = 0;
 }
 
 void keypad_update()
@@ -75,6 +79,7 @@ void keypad_update()
         #if INPUT_MONITOR_DEBUG
             ESP_LOGI(TAG, "KEY_PRESSED: MENU");
         #endif
+        minos_keypad_set_menu();
         key_pressed = LV_GROUP_KEY_ESC;
     }
     else if((raw_input&HAL_KEY_VOL_D) == HAL_KEY_PRESSED)
@@ -82,6 +87,7 @@ void keypad_update()
         #if INPUT_MONITOR_DEBUG
             ESP_LOGI(TAG, "KEY_PRESSED: VOLUME_DOWN");
         #endif
+        minos_keypad_set_vol_down();
         key_status = LV_INDEV_STATE_REL;
         // key_pressed = LV_GROUP_KEY_ESC;
     }
@@ -90,6 +96,7 @@ void keypad_update()
         #if INPUT_MONITOR_DEBUG
             ESP_LOGI(TAG, "KEY_PRESSED: VOLUME_UP");
         #endif
+        minos_keypad_set_vol_up();
         key_status = LV_INDEV_STATE_REL;
         // key_pressed = LV_GROUP_KEY_ESC;
     }

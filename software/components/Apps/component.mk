@@ -15,6 +15,7 @@ COMPONENT_ADD_INCLUDEDIRS := . \
 	nofrendo/nes \
 	nofrendo/sndhrdw \
 	launcher \
+	user_data \
 
 COMPONENT_SRCDIRS := . \
 	nofrendo \
@@ -24,6 +25,7 @@ COMPONENT_SRCDIRS := . \
 	nofrendo/sndhrdw \
 	nofrendo/mappers \
 	launcher \
+	user_data \
 
 CFLAGS += -Wno-error=char-subscripts -Wno-error=attributes -DNOFRENDO_DEBUG
 

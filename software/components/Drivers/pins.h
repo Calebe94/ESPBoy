@@ -22,7 +22,7 @@
 
 //-------------------- SIGNAL OUTPUTS --------------------
 #define AUDIO_SHDN      GPIO_NUM_15
-#define STATUS_PIN          GPIO_NUM_2
+#define STATUS_PIN      GPIO_NUM_2
 #define AUDIO           GPIO_NUM_26
 
 //-------------------- GAMEPAD READING --------------------

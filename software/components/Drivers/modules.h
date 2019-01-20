@@ -20,8 +20,9 @@
 
 err_t modules_init(void)
 {
-    // sdcard_init();
     ESP_ERROR_CHECK( nvs_flash_init() );
+
+    // sdcard_init();
     disp_spi_init();
     ili9431_init();
     jack_sense_init();
@@ -30,7 +31,6 @@ err_t modules_init(void)
     battery_init();
     
     keypad_init();
-
     
     // wifi_init();
     

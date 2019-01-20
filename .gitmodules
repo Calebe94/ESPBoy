@@ -13,3 +13,6 @@
 [submodule "software/components/Apps/launcher"]
 	path = software/components/Apps/launcher
 	url = https://github.com/Calebe94/espboy_launcher
+[submodule "software/components/Libs/sqlite3"]
+	path = software/components/Libs/sqlite3
+	url = https://github.com/siara-cc/esp32-idf-sqlite3
