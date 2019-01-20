@@ -16,3 +16,6 @@
 [submodule "software/components/Libs/sqlite3"]
 	path = software/components/Libs/sqlite3
 	url = https://github.com/siara-cc/esp32-idf-sqlite3
+[submodule "software/components/Libs/esp32-idf-sqlite3"]
+	path = software/components/Libs/esp32-idf-sqlite3
+	url = https://github.com/siara-cc/esp32-idf-sqlite3
