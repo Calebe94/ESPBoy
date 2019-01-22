@@ -9,7 +9,7 @@
 
 #include "minos_hal_indev.h"
 
-#include "k_config.h"
+#include "minos_config.h"
 
 static const char * TAG = "INPUT_MANAGER";
 // static keypad_t keypad_status;

@@ -5,7 +5,7 @@
 
 #include "nvs_flash.h"
 
-#include "k_config.h"
+#include "minos_config.h"
 #include "audio/hal_audio.h"
 #include "display/disp_spi.h"
 #include "display/ili9341.h"

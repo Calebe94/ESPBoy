@@ -2,7 +2,7 @@
 #define _SYSINIT_H_
 
 #include <stdint.h>
-#include "k_config.h"
+#include "minos_config.h"
 
 err_t modules_init(void);
 

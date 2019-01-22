@@ -1,17 +1,11 @@
 #ifndef _BATERY_MANAGER_H_
 #define _BATERY_MANAGER_H_
 
-#include "k_config.h"
-#include "array.h"
+#include "minos_config.h"
 
-// Array *readings;
-float voltage_readings[10];
-uint8_t porcentage_readings[10];
-
-uint8_t readings_index;
-
-float average_battery_voltage; // The average value from voltage battery
-uint8_t average_battery_porcentage; // The average value from voltage porcentage
+/*******************
+ * GLOBAL FUNCTIONS
+*******************/
 
 void battery_manager_init(void);
 

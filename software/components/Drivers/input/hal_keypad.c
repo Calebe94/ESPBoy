@@ -10,7 +10,7 @@
 #include "pins.h"
 #include "hal_keypad.h"
 
-#include "k_config.h"
+#include "minos_config.h"
 
 void keypad_init(void)
 {

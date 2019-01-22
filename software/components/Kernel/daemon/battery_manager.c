@@ -1,9 +1,8 @@
 #include "battery_manager.h"
 #include "hal_battery.h"
-#include "array.h"
-#include "bubble.h"
-#include "k_utils.h"
-#include "k_config.h"
+// #include "bubble.h"
+#include "minos_utils.h"
+#include "minos_config.h"
 
 #if BATTERY_DEBUG
 #include <stdio.h>
@@ -16,12 +15,20 @@
 * Faz a média dos valores que sobram
 */
 
+/*******************
+ * STATIC VARIABLES
+********************/
+
+float voltage_readings[10];
+uint8_t porcentage_readings[10];
+
+uint8_t readings_index;
+
+float average_battery_voltage; // The average value from voltage battery
+uint8_t average_battery_porcentage; // The average value from voltage porcentage
+
 void battery_manager_init(void)
 {
-    // ArrayConf array_conf;
-    // array_conf.capacity = 10;
-    // enum cc_stat s = array_new_conf(&array_conf, &readings);
-    // array_new(&readings);
     average_battery_voltage = 0.0;
     average_battery_voltage = 0; 
     readings_index = 0;
@@ -42,12 +49,12 @@ void battery_update()
     #endif
 
     float aux_voltage = get_battery_voltage();
-    // uint8_t aux_porcentage = get_battery_porcentage();
+    uint8_t aux_porcentage = get_battery_porcentage();
 
     if(readings_index == 10)
     {
-        bubbleSort(voltage_readings, 10, sizeof(float), cmp_float);
-        // bubbleSort(porcentage_readings, 10, sizeof(uint8_t), cmp_float);
+        bubble_sort(voltage_readings, 10, sizeof(float), cmp_float);
+        bubble_sort(porcentage_readings, 10, sizeof(uint8_t), cmp_float);
 
         #if BATTERY_DEBUG 
             printf("\n> Voltage Readings: ");
@@ -55,23 +62,17 @@ void battery_update()
             {
                 printf("%.2f ", voltage_readings[index]);
             }
-            
-            // printf("\n> Porcentage Readings: ");
-            // for ( uint8_t index = 0; index < 10; index++)
-            // {
-            //     printf("%x ", porcentage_readings[index]);
-            // }
         #endif
         
         average_battery_voltage = voltage_smoothing(voltage_readings);
-        // average_battery_porcentage = porcentage_smoothing(porcentage_readings);
+        average_battery_porcentage = porcentage_smoothing(porcentage_readings);
 
         readings_index = 0;
     }
     else
     {
         voltage_readings[readings_index] = aux_voltage;
-        // porcentage_readings[readings_index] = aux_porcentage;
+        porcentage_readings[readings_index] = aux_porcentage;
         readings_index++;
     }
 }

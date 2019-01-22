@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <k_config.h>
+#include <minos_config.h>
 #include "linked_list.h"
 
 void linked_list_init(linked_list_t **list){
