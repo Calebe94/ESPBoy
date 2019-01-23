@@ -17,21 +17,28 @@
 
 #include "ui_manager.h"
 // #include "../../Libs/sqlite3_connector/sqlite3_conn.h"
+
 #include "sqlite3_conn.h"
+
 #include "user_data.h"
+
+#include "esp_log.h"
+
 
 void manager_init()
 {
     /* Start the main Task of the MinOS wich is the UI manager */
     ui_manager_init();
 
+    db_init();
+
+    user_data_init();
+	
+    db_shutdown();
+    
     battery_manager_init();
 
     ota_manager_init();
-    // Libs Init 
-    db_init();
-
-    // user_data_init();
 
     vTaskDelay(3000);
 
@@ -51,6 +58,10 @@ void manager_update()
 
     while(1)
     {   
+        // ESP_LOGI("DAEMONS UPDATE", "RAM left %d", esp_get_free_heap_size());
+        
+        // ESP_LOGI("DAEMONS UPDATE", "task stack: %d", uxTaskGetStackHighWaterMark(NULL));
+
         battery_update();
 
         keypad_update();

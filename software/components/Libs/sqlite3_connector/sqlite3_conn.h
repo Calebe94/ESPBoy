@@ -14,10 +14,13 @@
 ***********/
 #include "sqlite3.h"
 
+
 void db_init(void);
 
 int db_open(const char *filename, sqlite3 **db);
 
 int db_exec(sqlite3 *db, const char *sql);
+
+int db_shutdown(void);
 
 #endif

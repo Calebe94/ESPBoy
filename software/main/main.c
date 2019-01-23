@@ -15,7 +15,6 @@
 #include "esp_freertos_hooks.h"
 
 #include "sysinit.h"
-
 // #include "storage/odroid_sdcard.h"
 
 char *osd_getromdata();
@@ -28,6 +27,7 @@ int app_main(void)
 {
 	// odroid_sdcard_open("/sd");
 	os_init();
+
 	// ota_manager_init();
   	// nes_run();
 	// lvgl_run();

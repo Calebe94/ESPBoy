@@ -16,6 +16,7 @@
 #include "esp_timer.h"
 
 #include "sqlite3.h"
+#include "sqlite3_conn.h"
 
 static const char *TAG = "sqlite3_spiffs";
 
@@ -57,7 +58,7 @@ void db_init(void)
     }
 
     // remove existing file
-    unlink("/spiffs/test1.db");
+    // unlink("/spiffs/test1.db");
     // unlink("/spiffs/test2.db");
 
     sqlite3_initialize();
@@ -101,4 +102,10 @@ int db_exec(sqlite3 *db, const char *sql)
    }
    printf("Time taken: %lld\n", esp_timer_get_time()-start);
    return rc;
+}
+
+int db_shutdown()
+{
+    // sqlite3_os_end()
+   return sqlite3_shutdown();
 }
