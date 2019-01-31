@@ -8,7 +8,9 @@
 
 #include "lvgl.h"
 
-#include "ili9341.h"
+// #include "display/ili9341.h"
+#include "display/display.h"
+
 #include "ui_manager.h"
 // #include "hal_keypad.h"
 #include "input_manager.h"
@@ -27,7 +29,8 @@ static void _ui_start(void)
 
 	lv_disp_drv_t disp;
 	lv_disp_drv_init(&disp);
-	disp.disp_flush = ili9431_flush;
+	// disp.disp_flush = ili9431_flush;
+	disp.disp_flush = display_flush;
 	lv_disp_drv_register(&disp);
 
 	lv_indev_drv_t indev_drv;

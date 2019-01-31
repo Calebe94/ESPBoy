@@ -188,12 +188,13 @@ esp_err_t odroid_sdcard_open(const char* base_path)
     	host.slot = HSPI_HOST; // HSPI_HOST;
     	//host.max_freq_khz = SDMMC_FREQ_HIGHSPEED; //10000000;
         host.max_freq_khz = SDMMC_FREQ_DEFAULT;
+        // host.max_freq_khz = SDMMC_FREQ_PROBING;
 
     	sdspi_slot_config_t slot_config = SDSPI_SLOT_CONFIG_DEFAULT();
     	slot_config.gpio_miso = (gpio_num_t)SD_PIN_NUM_MISO;
     	slot_config.gpio_mosi = (gpio_num_t)SD_PIN_NUM_MOSI;
     	slot_config.gpio_sck  = (gpio_num_t)SD_PIN_NUM_CLK;
-    	slot_config.gpio_cs = (gpio_num_t)SD_PIN_NUM_CS;
+    	slot_config.gpio_cs =   (gpio_num_t)SD_PIN_NUM_CS;
     	//slot_config.dma_channel = 2;
 
     	// Options for mounting the filesystem.

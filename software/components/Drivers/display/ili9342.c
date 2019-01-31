@@ -91,10 +91,12 @@ void ili9431_init(void)
 
 	//Send all the commands
 	uint16_t cmd = 0;
-	while (ili_init_cmds[cmd].databytes!=0xff) {
+	while (ili_init_cmds[cmd].databytes!=0xff) 
+	{
 		ili9441_send_cmd(ili_init_cmds[cmd].cmd);
 		ili9341_send_data(ili_init_cmds[cmd].data, ili_init_cmds[cmd].databytes&0x1F);
-		if (ili_init_cmds[cmd].databytes & 0x80) {
+		if (ili_init_cmds[cmd].databytes & 0x80) 
+		{
 			vTaskDelay(100 / portTICK_RATE_MS);
 		}
 		cmd++;
@@ -197,6 +199,7 @@ void ili9431_flush(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const lv_colo
 	ili9341_send_data((void*)color_map, size * 2);	/*Send the remaining data*/
 
 	lv_flush_ready();
+
 }
 
 void ili9341_rotate(uint8_t degrees)
