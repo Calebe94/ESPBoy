@@ -18,23 +18,13 @@
 #include "power/hal_battery.h"
 #include "storage/sdcard.h"
 #include "wifi/wifi.h"
-#include "storage/odroid_sdcard.h"
+#include "storage/sdcard.h"
 #include "driver/gpio.h"
 
 #include "pins.h"
 
-void sdcard_initilize()
-{
-    odroid_sdcard_open("/sd");
-    while(1)
-    {
-
-    }
-}
-
 err_t modules_init(void)
-{
-    gpio_pullup_en(GPIO_NUM_22);    
+{  
     sdcard_init();
 
     ESP_ERROR_CHECK( nvs_flash_init() );
