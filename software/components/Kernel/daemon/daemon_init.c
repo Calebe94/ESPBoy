@@ -8,39 +8,30 @@
 
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
+#include "esp_log.h"
 
-#include "battery_manager.h"
-#include "input_manager.h"
-#include "ota_manager.h"
+#include "daemon/battery_manager.h"
+#include "daemon/input_manager.h"
+#include "daemon/ota_manager.h"
+#include "daemon/ui_manager.h"
 
 #include "daemon_init.h"
-
-#include "ui_manager.h"
-// #include "../../Libs/sqlite3_connector/sqlite3_conn.h"
-
-#include "sqlite3_conn.h"
-
-#include "user_data.h"
-
-#include "esp_log.h"
 
 
 void manager_init()
 {
     /* Start the main Task of the MinOS wich is the UI manager */
-    ui_manager_init();
+    #if USE_UI_MANAGER
+        ui_manager_init();
+    #endif
 
-    db_init();
+    #if USE_BATTERY_MANAGER
+        battery_manager_init();
+    #endif
 
-    user_data_init();
-	
-    db_shutdown();
-    
-    battery_manager_init();
-
-    ota_manager_init();
-
-    vTaskDelay(3000);
+    #if USE_OTA_MANAGER
+        ota_manager_init();
+    #endif
 
 	xTaskCreate(
         &manager_update,    /* Function that implements the task. */
@@ -54,17 +45,22 @@ void manager_init()
 
 void manager_update()
 {
-    ui_stop_splash_screen();
+    #if USE_UI_MANAGER
+        ui_stop_splash_screen();
+    #endif
 
     while(1)
     {   
         // ESP_LOGI("DAEMONS UPDATE", "RAM left %d", esp_get_free_heap_size());
         
         // ESP_LOGI("DAEMONS UPDATE", "task stack: %d", uxTaskGetStackHighWaterMark(NULL));
+        #if USE_BATTERY_MANAGER
+            battery_update();
+        #endif
 
-        battery_update();
-
-        keypad_update();
+        #if USE_INPUT_MANAGER
+            keypad_update();
+        #endif
 
         vTaskDelay(50);
     }

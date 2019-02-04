@@ -5,11 +5,11 @@
 
 PROJECT_NAME := ESPBoy
 
-EXTRA_COMPONENT_DIRS :=	$(abspath components/Libs/lvgl) \
-						$(abspath components/Apps) \
+EXTRA_COMPONENT_DIRS :=	$(abspath components/Apps) \
 						$(abspath components/Libs) \
 						$(abspath components/Kernel) \
-						$(abspath components/Drivers) 
+						$(abspath components/Drivers) \
+						$(abspath components/Res) \
 
 include $(IDF_PATH)/make/project.mk
 

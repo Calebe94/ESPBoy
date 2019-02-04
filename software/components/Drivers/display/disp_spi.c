@@ -12,6 +12,7 @@
 #include "driver/spi_master.h"
 #include <string.h>
 
+#include "pins.h"
 /*********************
  *      DEFINES
  *********************/
@@ -43,9 +44,9 @@ void disp_spi_init(void)
 	esp_err_t ret;
 
 	spi_bus_config_t buscfg={
-		.miso_io_num=19,
-		.mosi_io_num=DISP_SPI_MOSI,
-		.sclk_io_num=DISP_SPI_CLK,
+		.miso_io_num=PIN_NUM_MISO,
+		.mosi_io_num=PIN_NUM_MOSI,
+		.sclk_io_num=PIN_NUM_CLK,
 		.quadwp_io_num=-1,
 		.quadhd_io_num=-1
 	};
@@ -53,7 +54,7 @@ void disp_spi_init(void)
 	spi_device_interface_config_t devcfg={
 		.clock_speed_hz=60*1000*1000,           //Clock out at 80 MHz
 		.mode=0,                                //SPI mode 0
-		.spics_io_num=DISP_SPI_CS,              //CS pin
+		.spics_io_num=PIN_NUM_CS,              //CS pin
 		.queue_size=1,
 		.pre_cb=NULL,
 		.post_cb=NULL,

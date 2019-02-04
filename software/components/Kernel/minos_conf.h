@@ -35,6 +35,7 @@
 #define USE_INPUT_MANAGER       1
 #define USE_BATTERY_MANAGER     1
 
+/* DEBUG */
 
 #endif
 
