@@ -35,7 +35,7 @@ static char tag[] = "i2cscanner";
 #define SDA_PIN 33
 #define SCL_PIN 32
 
-#define LOG_DEBUG   0
+#define LOG_DEBUG   1
 
 /*******************
  * GLOBAL FUNCTIONS

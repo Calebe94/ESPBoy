@@ -74,32 +74,32 @@ void keypad_update()
         key_status = LV_INDEV_STATE_REL;
         // key_pressed = LV_GROUP_KEY_ENTER;
     }
-    else if((raw_input&HAL_KEY_MENU) == HAL_KEY_PRESSED)
-    {
-        #if INPUT_MONITOR_DEBUG
-            ESP_LOGI(TAG, "KEY_PRESSED: MENU");
-        #endif
-        minos_keypad_set_menu();
-        key_pressed = LV_GROUP_KEY_ESC;
-    }
-    else if((raw_input&HAL_KEY_VOL_D) == HAL_KEY_PRESSED)
-    {
-        #if INPUT_MONITOR_DEBUG
-            ESP_LOGI(TAG, "KEY_PRESSED: VOLUME_DOWN");
-        #endif
-        minos_keypad_set_vol_down();
-        key_status = LV_INDEV_STATE_REL;
-        // key_pressed = LV_GROUP_KEY_ESC;
-    }
-    else if((raw_input&HAL_KEY_VOL_U) == HAL_KEY_PRESSED)
-    {
-        #if INPUT_MONITOR_DEBUG
-            ESP_LOGI(TAG, "KEY_PRESSED: VOLUME_UP");
-        #endif
-        minos_keypad_set_vol_up();
-        key_status = LV_INDEV_STATE_REL;
-        // key_pressed = LV_GROUP_KEY_ESC;
-    }
+    // else if((raw_input&HAL_KEY_MENU) == HAL_KEY_PRESSED)
+    // {
+    //     #if INPUT_MONITOR_DEBUG
+    //         ESP_LOGI(TAG, "KEY_PRESSED: MENU");
+    //     #endif
+    //     minos_keypad_set_menu();
+    //     key_pressed = LV_GROUP_KEY_ESC;
+    // }
+    // else if((raw_input&HAL_KEY_VOL_D) == HAL_KEY_PRESSED)
+    // {
+    //     #if INPUT_MONITOR_DEBUG
+    //         ESP_LOGI(TAG, "KEY_PRESSED: VOLUME_DOWN");
+    //     #endif
+    //     minos_keypad_set_vol_down();
+    //     key_status = LV_INDEV_STATE_REL;
+    //     // key_pressed = LV_GROUP_KEY_ESC;
+    // }
+    // else if((raw_input&HAL_KEY_VOL_U) == HAL_KEY_PRESSED)
+    // {
+    //     #if INPUT_MONITOR_DEBUG
+    //         ESP_LOGI(TAG, "KEY_PRESSED: VOLUME_UP");
+    //     #endif
+    //     minos_keypad_set_vol_up();
+    //     key_status = LV_INDEV_STATE_REL;
+    //     // key_pressed = LV_GROUP_KEY_ESC;
+    // }
     else if((raw_input&HAL_KEY_SELECT) == HAL_KEY_PRESSED)
     {
         #if INPUT_MONITOR_DEBUG

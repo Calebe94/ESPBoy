@@ -17,6 +17,7 @@
 
 #include "daemon_init.h"
 
+#include "i2c_scanner.h"
 
 void manager_init()
 {
@@ -33,6 +34,12 @@ void manager_init()
         ota_manager_init();
     #endif
 
+    #if USE_INPUT_MANAGER
+        keypad_manager_init();
+    #endif
+
+  	vTaskDelay(3000/portTICK_PERIOD_MS);
+      
 	xTaskCreate(
         &manager_update,    /* Function that implements the task. */
         "manager_update",   /* Text name for the task. */
@@ -48,6 +55,8 @@ void manager_update()
     #if USE_UI_MANAGER
         ui_stop_splash_screen();
     #endif
+
+    // i2c_scanner(NULL);
 
     while(1)
     {   
