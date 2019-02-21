@@ -8,6 +8,8 @@
 #include "input/hal_keypad.h"
 #include "power/hal_battery.h"
 #include "storage/sdcard.h"
+#include "storage/sdcard_pebri.h"
+
 #include "wifi/wifi.h"
 
 #include "minos_conf.h"
@@ -35,7 +37,10 @@ err_t modules_init(void)
 	#endif
 
 	#if USE_SDCARD
-    	sdcard_init();
+    	// sdcard_init();
+		char **files;
+		sdcard_open("/sdcard");
+		sdcard_files_get("/sdcard/nes", ".nes", &files);
 	#endif
 
 	#if USE_WIFI
